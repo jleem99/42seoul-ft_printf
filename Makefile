@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/01/21 04:03:51 by jleem            ###   ########.fr        #
+#    Updated: 2021/02/18 07:07:08 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ WFLAGS		= -Wall -Wextra
 CFLAGS		= $(WFLAGS) -I$(INCDIR)
 
 NAME		= libftprintf.a
-SRCDIR		= srcs/
-INCDIR		= includes/
-SRCS		= $(wildcard $(SRCDIR)*.c) # Use explicit variables
+SRCDIR		= srcs
+INCDIR		= includes
+SRCS		= $(wildcard $(SRCDIR)/*.c) # Use explicit variables
 OBJS		= $(SRCS:.c=.o)
 
 all			: $(NAME)
@@ -35,7 +35,7 @@ fclean		: clean
 re			: fclean all
 
 test		: re # To be removed
-	$(CC) main.c $(NAME) -o test.out
+	$(CC) main.c $(NAME) $(CFLAGS) -o test.out
 	./test.out
 
 .PHONY		: all clean fclean re

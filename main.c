@@ -1,9 +1,8 @@
+#include "ft_printf.h"
 #include <stdio.h>
 
 int main(void)
 {
-	int a = 10;
-
-	printf("%*d", 3, a);
+	printf("%d\n", ft_printf("hello%world", 1234, 1234));
 	return (0);
 }
