@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 20:34:49 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/20 22:53:22 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/21 07:53:55 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,13 @@ void	print_str(t_printer *printer, t_specifier *specifier);
 void	print_ptr(t_printer *printer, t_specifier *specifier);
 void	print_nchar(t_printer *printer, t_specifier *specifier);
 void	print_percent(t_printer *printer, t_specifier *specifier); // print_percent(printer) ???
+
+/*
+** Utility Functions
+*/
+
+# include <stdint.h>
+
+char	*ft_imtoa(intmax_t n);
 
 #endif
