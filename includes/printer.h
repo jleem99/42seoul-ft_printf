@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   printer.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 03:13:39 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/19 21:22:10 by jleem            ###   ########.fr       */
+/*   Created: 2021/02/19 21:19:35 by jleem             #+#    #+#             */
+/*   Updated: 2021/02/20 02:01:25 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef PRINTER_H
+# define PRINTER_H
 
-int		ft_printf(char const *format, ...);
+# include <stdarg.h>
+
+typedef struct	s_printer
+{
+	char const	*fmt;
+	int			fmt_idx;
+	int			fmt_len;
+	int			cursor;
+	int			nchar;
+	va_list		*ap;
+}				t_printer;
+
+t_printer		init_printer(char const *format, va_list *ap);
+char			printer_getc(t_printer *printer);
+char			printer_putc(t_printer *printer, char c);
 
 #endif
