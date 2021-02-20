@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:19:35 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/20 02:01:25 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/21 01:59:29 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_printer
 
 t_printer		init_printer(char const *format, va_list *ap);
 char			printer_getc(t_printer *printer);
-char			printer_putc(t_printer *printer, char c);
+void			printer_putc(t_printer *printer, char c);
+int				printer_chkc(t_printer *printer, char c);
 
 #endif

@@ -6,12 +6,12 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/20 00:58:28 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/21 02:00:09 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printer.h"
-#include <unistd.h>
+#include "libft.h"
 
 t_printer	init_printer(char const *format, va_list *ap)
 {
@@ -19,7 +19,7 @@ t_printer	init_printer(char const *format, va_list *ap)
 
 	printer.fmt = format;
 	printer.fmt_idx = 0;
-	printer.fmt_len = strlen(printer.fmt); // Replace to ft_strlen
+	printer.fmt_len = ft_strlen(printer.fmt);
 	printer.cursor = 0;
 	printer.nchar = 0;
 	printer.ap = ap;
@@ -34,12 +34,22 @@ char		printer_getc(t_printer *printer)
 		return (printer->fmt[printer->fmt_idx]);
 }
 
-char		printer_putc(t_printer *printer, char c)
+void		printer_putc(t_printer *printer, char c)
 {
-	write(1, &c, 1);
+	ft_putchar_fd(c, 1);
 	printer->nchar++;
 	if (c == '\n')
 		printer->cursor = 0;
 	else
 		printer->cursor++;
+}
+
+int			printer_chkc(t_printer *printer, char c)
+{
+	if (printer_getc(printer) == c)
+	{
+		printer->fmt_idx++;
+		return (1);
+	}
+	return (0);
 }
