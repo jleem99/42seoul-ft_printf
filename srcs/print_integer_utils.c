@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 07:43:49 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 08:26:08 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/22 03:47:58 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static char	pop_digit(intmax_t *n)
 
 char		*ft_imtoa(intmax_t n)
 {
-	char		digits[129];
-	char		digits_rev[128];
+	char		digits[40];
+	char		digits_rev[39];
 	int			i;
 	int			i_rev;
 	int const	minus = (n < 0);
