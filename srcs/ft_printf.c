@@ -6,13 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 02:03:40 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/22 02:40:57 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printer.h"
 #include "specifier.h"
+#include "print.h"
 #include "libft.h"
 
 static int	print_plain(t_printer *printer)

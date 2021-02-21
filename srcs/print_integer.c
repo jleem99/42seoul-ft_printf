@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 08:26:30 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/22 02:52:38 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ static void	print_d(t_printer *printer, t_specifier *specifier)
 	intmax_t	integer;
 	char	*str;
 
-	if (specifier->length == 0)
+	if (specifier->length < 3)
 		integer = va_arg(*printer->ap, int);
-	else if (specifier->length == 1)
-		integer = va_arg(*printer->ap , char);
-	else if (specifier->length == 2)
-		integer = va_arg(*printer->ap, short);
 	else if (specifier->length == 3)
 		integer = va_arg(*printer->ap, long);
 	else if (specifier->length == 4)
@@ -46,17 +42,17 @@ static void	print_d(t_printer *printer, t_specifier *specifier)
 
 static void	print_o(t_printer *printer, t_specifier *specifier)
 {
-	
+
 }
 
 static void	print_u(t_printer *printer, t_specifier *specifier)
 {
-	
+
 }
 
 static void	print_x(t_printer *printer, t_specifier *specifier)
 {
-	
+
 }
 
 void		print_integer(t_printer *printer, t_specifier *specifier) // validate malloc
