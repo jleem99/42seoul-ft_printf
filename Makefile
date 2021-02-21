@@ -6,14 +6,16 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/02/18 07:07:08 by jleem            ###   ########.fr        #
+#    Updated: 2021/02/21 07:08:01 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 AR			= ar -rcs
 WFLAGS		= -Wall -Wextra
-CFLAGS		= $(WFLAGS) -I$(INCDIR)
+INC_FLAGS	= -I$(INCDIR) -I$(LIBFTDIR)
+# CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g # To be removed
+CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g -fsanitize=address # To be removed
 
 NAME		= libftprintf.a
 SRCDIR		= srcs
@@ -21,21 +23,40 @@ INCDIR		= includes
 SRCS		= $(wildcard $(SRCDIR)/*.c) # Use explicit variables
 OBJS		= $(SRCS:.c=.o)
 
+LIBFT		= $(addprefix $(LIBFTDIR), libft.a)
+LIBFTDIR	= Libft/
+
 all			: $(NAME)
 
-$(NAME)		: $(OBJS)
-	$(AR) $@ $^
+$(NAME)		: $(OBJS) cplibobj
+	$(AR) $@ $(OBJS) libobj/*.o
 
-clean		:
+cplibobj	: cleanlibobj $(LIBFT)
+	mkdir libobj
+	cp $(LIBFT) libobj
+	cd libobj && ar -x libft.a
+
+cleanlibobj	:
+	rm -rf libobj
+
+$(LIBFT)	:
+	$(MAKE) -C $(LIBFTDIR)		CC='$(CC)' CFLAGS='$(CFLAGS)'	bonus
+
+clean		: cleanlibobj
+	$(MAKE) -C $(LIBFTDIR) clean
 	rm -f $(OBJS)
 
 fclean		: clean
+	$(MAKE) -C $(LIBFTDIR) fclean
 	rm -f $(NAME)
 
 re			: fclean all
 
-test		: re # To be removed
+
+debug		: all # To be removed
 	$(CC) main.c $(NAME) $(CFLAGS) -o test.out
+
+test		: debug # To be removed
 	./test.out
 
-.PHONY		: all clean fclean re
+.PHONY		: all clean fclean cplibobj cleanlibobj re
