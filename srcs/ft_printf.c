@@ -6,14 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/20 02:58:41 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/21 02:03:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 #include "printer.h"
 #include "specifier.h"
+#include "libft.h"
 
 static int	print_plain(t_printer *printer)
 {
@@ -33,7 +33,7 @@ static int	print_format(t_printer *printer)
 {
 	t_specifier	*specifier;
 
-	if (printer_getc(printer) == '%')
+	if (printer_chkc(printer, '%'))
 	{
 		specifier = parse_specifier(printer);
 		if (!specifier)
@@ -51,15 +51,13 @@ static int	print_format(t_printer *printer)
 		else if (specifier->specifier == 'n')
 			print_nchar(printer, specifier);
 		else if (specifier->specifier == '%')
-			print_percentage(printer, specifier); // print_percentage(printer) ???
+			print_percent(printer, specifier); // print_percent(printer) ???
 		else
 			return (0); // Todo ??
 		free(specifier);
 	}
 	return (1);
 }
-
-#include <string.h>
 
 int			ft_printf(char const *format, ...)
 {
@@ -72,11 +70,11 @@ int			ft_printf(char const *format, ...)
 	nchar_last = -1;
 	while (printer.nchar - nchar_last > 0)
 	{
+		nchar_last = printer.nchar;
 		if (!print_plain(&printer) || !print_format(&printer))
 		{
 			// Handle Error
 		}
-		nchar_last = printer.nchar;
 	}
 	va_end(ap);
 	return (printer.nchar);
