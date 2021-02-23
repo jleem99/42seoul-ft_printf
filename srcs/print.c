@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 21:55:34 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 03:18:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/22 17:52:07 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	print_lpad(int slen, t_printer *printer, t_specifier *specifier)
 			pad = ' ';
 		i = 0;
 		while (i++ < padlen)
-			ft_putchar_fd(pad, 1);
+			printer_putc(printer, pad);
 	}
 }
 
@@ -48,7 +48,7 @@ static void	print_rpad(int slen, t_printer *printer, t_specifier *specifier)
 	{
 		i = 0;
 		while (i++ < padlen)
-			ft_putchar_fd(' ', 1);
+			printer_putc(printer, ' ');
 	}
 }
 
