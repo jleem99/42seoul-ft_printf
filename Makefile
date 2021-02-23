@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/02/22 02:41:31 by jleem            ###   ########.fr        #
+#    Updated: 2021/02/23 16:31:52 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC			= gcc
 AR			= ar -rcs
 WFLAGS		= -Wall -Wextra
 INC_FLAGS	= -I$(INCDIR) -I$(LIBFTDIR)
-CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g # To be removed
-# CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g -fsanitize=address # To be removed
+# CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g # To be removed
+CFLAGS		= $(WFLAGS) $(INC_FLAGS) -g -fsanitize=address # To be removed
 CFLAGS		+= -Wno-unused-parameter # To be removed
 
 NAME		= libftprintf.a
