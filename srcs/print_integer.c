@@ -6,39 +6,29 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/22 17:19:17 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/24 13:21:22 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "printer.h"
 #include "specifier.h"
-#include "flag.h"
+#include "apply_specifier.h"
 #include "libft.h"
-#include <stddef.h>
-#include <stdarg.h>
+#include "getarg.h"
 
 static void	print_d(t_printer *printer, t_specifier *specifier)
 {
 	intmax_t	integer;
 	char		*str;
 
-	if (specifier->length < 3)
-		integer = va_arg(*printer->ap, int);
-	else if (specifier->length == 3)
-		integer = va_arg(*printer->ap, long);
-	else if (specifier->length == 4)
-		integer = va_arg(*printer->ap, long long);
-	else if (specifier->length == 5)
-		integer = va_arg(*printer->ap, intmax_t);
-	else if (specifier->length == 6)
-		integer = va_arg(*printer->ap, size_t);
-	else if (specifier->length == 7)
-		integer = va_arg(*printer->ap, ptrdiff_t);
+	integer = getarg_integer(printer, specifier);
+	if (integer > 0)
+		str = ft_uimtoa_10(integer);
 	else
-		return ;
-	str = ft_imtoa_10(integer);
-	apply_flag_integer(&str, specifier, integer > 0);
+		str = ft_uimtoa_10(-integer);
+	apply_precision_integer(&str, specifier);
+	apply_flag_integer(&str, specifier, integer < 0);
 	print(str, printer, specifier);
 	free(str);
 }
@@ -48,22 +38,10 @@ static void	print_o(t_printer *printer, t_specifier *specifier)
 	uintmax_t	integer;
 	char		*str;
 
-	if (specifier->length < 3)
-		integer = va_arg(*printer->ap, unsigned int);
-	else if (specifier->length == 3)
-		integer = va_arg(*printer->ap, unsigned long);
-	else if (specifier->length == 4)
-		integer = va_arg(*printer->ap, unsigned long long);
-	else if (specifier->length == 5)
-		integer = va_arg(*printer->ap, uintmax_t);
-	else if (specifier->length == 6)
-		integer = va_arg(*printer->ap, size_t);
-	else if (specifier->length == 7)
-		integer = va_arg(*printer->ap, ptrdiff_t);
-	else
-		return ;
+	integer = getarg_uinteger(printer, specifier);
 	str = ft_uimtoa_8(integer);
-	apply_flag_integer(&str, specifier, 1);
+	apply_precision_integer(&str, specifier);
+	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
 	free(str);
 }
@@ -73,22 +51,10 @@ static void	print_u(t_printer *printer, t_specifier *specifier)
 	uintmax_t	integer;
 	char		*str;
 
-	if (specifier->length < 3)
-		integer = va_arg(*printer->ap, unsigned int);
-	else if (specifier->length == 3)
-		integer = va_arg(*printer->ap, unsigned long);
-	else if (specifier->length == 4)
-		integer = va_arg(*printer->ap, unsigned long long);
-	else if (specifier->length == 5)
-		integer = va_arg(*printer->ap, uintmax_t);
-	else if (specifier->length == 6)
-		integer = va_arg(*printer->ap, size_t);
-	else if (specifier->length == 7)
-		integer = va_arg(*printer->ap, ptrdiff_t);
-	else
-		return ;
+	integer = getarg_uinteger(printer, specifier);
 	str = ft_uimtoa_10(integer);
-	apply_flag_integer(&str, specifier, 1);
+	apply_precision_integer(&str, specifier);
+	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
 	free(str);
 }
@@ -98,25 +64,13 @@ static void	print_x(t_printer *printer, t_specifier *specifier)
 	uintmax_t	integer;
 	char		*str;
 
-	if (specifier->length < 3)
-		integer = va_arg(*printer->ap, unsigned int);
-	else if (specifier->length == 3)
-		integer = va_arg(*printer->ap, unsigned long);
-	else if (specifier->length == 4)
-		integer = va_arg(*printer->ap, unsigned long long);
-	else if (specifier->length == 5)
-		integer = va_arg(*printer->ap, uintmax_t);
-	else if (specifier->length == 6)
-		integer = va_arg(*printer->ap, size_t);
-	else if (specifier->length == 7)
-		integer = va_arg(*printer->ap, ptrdiff_t);
-	else
-		return ;
+	integer = getarg_uinteger(printer, specifier);
 	if (specifier->specifier == 'x')
 		str = ft_uimtoa_16(integer, 'a');
 	else
 		str = ft_uimtoa_16(integer, 'A');
-	apply_flag_integer(&str, specifier, 1);
+	apply_precision_integer(&str, specifier);
+	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
 	free(str);
 }

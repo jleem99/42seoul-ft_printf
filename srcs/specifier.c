@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 02:03:24 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/24 13:15:10 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+static int		is_specifier(char c)
+{
+	return (ft_strchr("diuoxXfFeEgGaAcspn%", c) != NULL);
+}
+
 static int		parse_flag(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
+	// printer->fmt_idx = printer->spec_idx;
 	c = printer_getc(printer);
 	while (ft_strchr("-+ #0", c))
 	{
@@ -43,6 +49,13 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
+	// // printer->fmt_idx = printer->spec_idx;
+	// c = printer_getc(printer);
+	// while (ft_strchr("-+ #", c))
+	// {
+	// 	printer->fmt_idx++;
+	// 	c = printer_getc(printer);
+	// }
 	specifier->width = -1;
 	c = printer_getc(printer);
 	if (c == '*')
@@ -67,6 +80,18 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
+	// // printer->fmt_idx = printer->spec_idx;
+	// c = printer_getc(printer);
+	// while (ft_strchr("-+ #", c))
+	// {
+	// 	printer->fmt_idx++;
+	// 	c = printer_getc(printer);
+	// }
+	// while (ft_strchr("0123456789", c))
+	// {
+	// 	printer->fmt_idx++;
+	// 	c = printer_getc(printer);
+	// }
 	specifier->precision = -1;
 	if (!printer_chkc(printer, '.'))
 		return (1);
@@ -86,11 +111,14 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 			c = printer_getc(printer);
 		}
 	}
+	else
+		specifier->precision = 0;
 	return (1);
 }
 
 static int		parse_length(t_specifier *specifier, t_printer *printer)
 {
+	// printer->fmt_idx = printer->spec_idx;
 	if (printer_chkc(printer, 'h'))
 	{
 		specifier->length = 2;
@@ -124,6 +152,7 @@ t_specifier		*parse_specifier(t_printer *printer)
 {
 	t_specifier		*specifier;
 
+	printer->spec_idx = printer->fmt_idx;
 	specifier = ft_calloc(1, sizeof(t_specifier));
 	if (!specifier)
 		return (NULL);
@@ -137,5 +166,6 @@ t_specifier		*parse_specifier(t_printer *printer)
 		return (NULL);
 	}
 	specifier->specifier = printer->fmt[printer->fmt_idx++];
+	// printf(">%d_%d\n", specifier->width, specifier->precision);
 	return (specifier);
 }

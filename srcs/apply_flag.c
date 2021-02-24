@@ -6,11 +6,11 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/23 19:11:26 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/24 12:40:36 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "apply_flag.h"
+#include "apply_specifier.h"
 #include "specifier.h"
 #include "libft.h"
 
@@ -46,15 +46,32 @@ static void	apply_flag_space(char **pstr)
 	*pstr = str_new;
 }
 
-void		apply_flag_integer(char **pstr, t_specifier *s, int plus)
+static void	apply_neg(char **pstr)
 {
-	if (s->f_pound)
-		apply_flag_pound(pstr, s);
-	if (plus)
+	char	*str_new;
+
+	str_new = ft_strjoin("-", *pstr);
+	free(*pstr);
+	*pstr = str_new;
+}
+
+void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
+{
+	if (isneg)
+		apply_neg(pstr);
+	else
 	{
-		if (s->f_plus)
-			apply_flag_plus(pstr);
-		else if (s->f_space)
-			apply_flag_space(pstr);
+		if (ft_strchr("oxXp", specifier->specifier))
+		{
+			if (specifier->f_pound)
+				apply_flag_pound(pstr, specifier);
+		}
+		else
+		{
+			if (specifier->f_plus)
+				apply_flag_plus(pstr);
+			else if (specifier->f_space)
+				apply_flag_space(pstr);
+		}
 	}
 }
