@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/22 02:40:57 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/25 19:33:11 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	print_plain(t_printer *printer)
 	char	c;
 
 	c = printer_getc(printer);
-	while (c != '%' && c > 0)
+	while (c != '%' && c != '\0')
 	{
 		printer->fmt_idx++;
 		printer_putc(printer, c);
@@ -63,15 +63,12 @@ static int	print_format(t_printer *printer)
 int			ft_printf(char const *format, ...)
 {
 	va_list		ap;
-	int			nchar_last;
 	t_printer	printer;
 
 	va_start(ap, format);
 	printer = init_printer(format, &ap);
-	nchar_last = -1;
-	while (printer.nchar - nchar_last > 0)
+	while (printer.fmt_idx < printer.fmt_len)
 	{
-		nchar_last = printer.nchar;
 		if (!print_plain(&printer) || !print_format(&printer))
 		{
 			// Handle Error

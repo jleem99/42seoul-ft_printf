@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/21 02:00:09 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/25 19:40:24 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_printer	init_printer(char const *format, va_list *ap)
 char		printer_getc(t_printer *printer)
 {
 	if (printer->fmt_idx >= printer->fmt_len)
-		return (-1);
+		return (0);
 	else
 		return (printer->fmt[printer->fmt_idx]);
 }
