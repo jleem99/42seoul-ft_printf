@@ -6,23 +6,21 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 20:39:27 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/22 02:53:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/02/26 05:10:46 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
 #include "printer.h"
 #include "specifier.h"
 #include <stdarg.h>
-#include <stdlib.h>
 
-void	print_char(t_printer *printer, t_specifier *specifier) // validate malloc
+void	print_char(t_printer *printer, t_specifier *specifier)
 {
-	char	*str;
-
-	str = malloc(2);
-	str[0] = va_arg(*printer->ap, int);
-	str[1] = '\0';
-	print(str, printer, specifier);
-	free(str);
+	if (!specifier->f_minus)
+		while (--specifier->width > 0)
+			printer_putc(printer, ' ');
+	printer_putc(printer, va_arg(*printer->ap, int));
+	if (specifier->f_minus)
+		while (--specifier->width > 0)
+			printer_putc(printer, ' ');
 }
