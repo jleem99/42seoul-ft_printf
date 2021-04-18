@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/02/25 01:25:10 by jleem            ###   ########.fr        #
+#    Updated: 2021/04/18 05:08:09 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,21 +29,14 @@ LIBFTDIR	= Libft/
 
 all			: $(NAME)
 
-$(NAME)		: $(OBJS) cplibobj
-	$(AR) $@ $(OBJS) libobj/*.o
-
-cplibobj	: cleanlibobj $(LIBFT)
-	mkdir libobj
-	cp $(LIBFT) libobj
-	cd libobj && ar -x libft.a
-
-cleanlibobj	:
-	rm -rf libobj
+$(NAME)		: $(LIBFT) $(OBJS)
+	cp $(LIBFT) $@
+	$(AR) $@ $(OBJS)
 
 $(LIBFT)	:
 	$(MAKE) -C $(LIBFTDIR)		CC='$(CC)' CFLAGS='$(CFLAGS)'	bonus
 
-clean		: cleanlibobj
+clean		:
 	$(MAKE) -C $(LIBFTDIR) clean
 	rm -f $(OBJS)
 
@@ -60,4 +53,4 @@ debug		: all # To be removed
 test		: debug # To be removed
 	./test.out
 
-.PHONY		: all clean fclean cplibobj cleanlibobj re
+.PHONY		: all clean fclean re
