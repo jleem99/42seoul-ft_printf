@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/25 01:34:30 by jleem            ###   ########.fr       */
+/*   Updated: 2021/03/24 13:57:53 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ static void	apply_flag_zero(char **pstr, t_specifier *specifier, int isneg)
 	int			padlen;
 
 	padlen = specifier->width - slen;
-	if (ft_strchr("oxXp", specifier->specifier))
+	if (ft_strchr("oxXp", specifier->specifier) && specifier->f_pound)
 	{
-		if (specifier->f_pound)
-		{
-			if (specifier->specifier == 'o')
-				padlen -= 1;
-			else
-				padlen -= 2;
-		}
+		if (specifier->specifier == 'o')
+			padlen -= 1;
+		else
+			padlen -= 2;
 	}
 	else if (specifier->f_plus || specifier->f_space)
 		padlen -= 1;
@@ -91,19 +88,13 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 		apply_flag_zero(pstr, specifier, isneg);
 	if (isneg)
 		apply_neg(pstr);
+	else if (ft_strchr("oxXp", specifier->specifier) && specifier->f_pound)
+		apply_flag_pound(pstr, specifier);
 	else
 	{
-		if (ft_strchr("oxXp", specifier->specifier))
-		{
-			if (specifier->f_pound)
-				apply_flag_pound(pstr, specifier);
-		}
-		else
-		{
-			if (specifier->f_plus)
-				apply_flag_plus(pstr);
-			else if (specifier->f_space)
-				apply_flag_space(pstr);
-		}
+		if (specifier->f_plus)
+			apply_flag_plus(pstr);
+		else if (specifier->f_space)
+			apply_flag_space(pstr);
 	}
 }
