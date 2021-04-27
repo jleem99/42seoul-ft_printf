@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/25 19:40:24 by jleem            ###   ########.fr       */
+/*   Updated: 2021/04/27 21:45:29 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ char		printer_getc(t_printer *printer)
 		return (0);
 	else
 		return (printer->fmt[printer->fmt_idx]);
+}
+
+char		printer_popc(t_printer *printer)
+{
+	printer->fmt_idx++;
+	return (printer_getc(printer));
 }
 
 void		printer_putc(t_printer *printer, char c)

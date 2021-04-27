@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/04/27 21:11:53 by jleem            ###   ########.fr       */
+/*   Updated: 2021/04/27 21:47:20 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ static int		parse_flag(t_specifier *specifier, t_printer *printer)
 			specifier->f_pound = 1;
 		else if (c == '0')
 			specifier->f_zero = 1;
-		printer->fmt_idx++;
-		c = printer_getc(printer);
+		c = printer_popc(printer);
 	}
 	return (1);
 }
@@ -60,7 +59,7 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 			specifier->f_minus = 1;
 			specifier->width *= -1;
 		}
-		printer->fmt_idx++;
+		printer_popc(printer);
 	}
 	else if (ft_isdigit(c))
 	{
@@ -68,8 +67,7 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 		while (ft_isdigit(c))
 		{
 			specifier->width = specifier->width * 10 + c - '0';
-			printer->fmt_idx++;
-			c = printer_getc(printer);
+			c = printer_popc(printer);
 		}
 	}
 	return (1);
@@ -91,7 +89,7 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 		specifier->precision = va_arg(*printer->ap, int);
 		if (specifier->precision < 0)
 			specifier->precision = -1;
-		printer->fmt_idx++;
+		printer_popc(printer);
 	}
 	else if (ft_isdigit(c))
 	{
@@ -99,8 +97,7 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 		while (ft_isdigit(c))
 		{
 			specifier->precision = specifier->precision * 10 + c - '0';
-			printer->fmt_idx++;
-			c = printer_getc(printer);
+			c = printer_popc(printer);
 		}
 	}
 	else
@@ -157,6 +154,7 @@ t_specifier		*parse_specifier(t_printer *printer)
 		free(specifier);
 		return (NULL);
 	}
-	specifier->specifier = printer->fmt[printer->fmt_idx++];
+	specifier->specifier = printer_getc(printer);
+	printer_popc(printer);
 	return (specifier);
 }

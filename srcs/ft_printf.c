@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/25 19:33:11 by jleem            ###   ########.fr       */
+/*   Updated: 2021/04/27 21:46:19 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ static int	print_plain(t_printer *printer)
 	c = printer_getc(printer);
 	while (c != '%' && c != '\0')
 	{
-		printer->fmt_idx++;
 		printer_putc(printer, c);
-		c = printer_getc(printer);
+		c = printer_popc(printer);
 	}
 	return (1);
 }
