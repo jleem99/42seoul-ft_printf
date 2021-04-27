@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/25 01:00:55 by jleem            ###   ########.fr       */
+/*   Updated: 2021/04/27 21:11:53 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,7 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
-	// // printer->fmt_idx = printer->spec_idx;
-	// c = printer_getc(printer);
-	// while (ft_strchr("-+ #", c))
-	// {
-	// 	printer->fmt_idx++;
-	// 	c = printer_getc(printer);
-	// }
+	// printer->fmt_idx = printer->spec_idx;
 	specifier->width = -1;
 	c = printer_getc(printer);
 	if (c == '*')
@@ -86,18 +80,7 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 	char	c;
 	int		sig;
 
-	// // printer->fmt_idx = printer->spec_idx;
-	// c = printer_getc(printer);
-	// while (ft_strchr("-+ #", c))
-	// {
-	// 	printer->fmt_idx++;
-	// 	c = printer_getc(printer);
-	// }
-	// while (ft_strchr("0123456789", c))
-	// {
-	// 	printer->fmt_idx++;
-	// 	c = printer_getc(printer);
-	// }
+	// printer->fmt_idx = printer->spec_idx;
 	specifier->precision = -1;
 	sig = 1;
 	if (!printer_chkc(printer, '.'))
