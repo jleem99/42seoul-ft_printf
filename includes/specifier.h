@@ -6,14 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:15:56 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/19 22:00:27 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/18 20:09:15 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPECIFIER_H
 # define SPECIFIER_H
 
-typedef struct	s_printer t_printer;
+typedef struct s_printer	t_printer;
 
 /*
 **	[struct s_specifier]
@@ -49,5 +49,12 @@ typedef struct	s_specifier
 }				t_specifier;
 
 t_specifier		*parse_specifier(t_printer *printer);
+
+/*
+** Utility Functions
+*/
+static int		is_specifier(t_specifier *specifier);
+int				is_integer(t_specifier *specifier);
+int				is_float(t_specifier *specifier);
 
 #endif

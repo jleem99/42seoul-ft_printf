@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/04/27 21:47:20 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/18 20:07:25 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 #include "libft_bonus.h"
 #include <stdlib.h>
 #include <stdarg.h>
-
-static int		is_specifier(char c)
-{
-	return (ft_strchr("diuoxXfFeEgGaAcspn%", c) != NULL);
-}
 
 static int		parse_flag(t_specifier *specifier, t_printer *printer)
 {

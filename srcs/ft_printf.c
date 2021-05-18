@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/04/27 21:46:19 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/18 18:40:46 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int	print_format(t_printer *printer)
 		specifier = parse_specifier(printer);
 		if (!specifier)
 			return (0);
-		if (ft_strchr("diuoxX", specifier->specifier))
+		if (is_integer(specifier))
 			print_integer(printer, specifier);
-		else if (ft_strchr("fFeEgGaA", specifier->specifier))
+		else if (is_float(specifier))
 			print_float(printer, specifier);
 		else if (specifier->specifier == 'c')
 			print_char(printer, specifier);
@@ -51,7 +51,7 @@ static int	print_format(t_printer *printer)
 		else if (specifier->specifier == 'n')
 			print_nchar(printer, specifier);
 		else if (specifier->specifier == '%')
-			print_percent(printer, specifier); // print_percent(printer) ???
+			print_percent(printer, specifier);
 		else
 			return (0); // Todo ??
 		free(specifier);

@@ -1,9 +1,11 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
+#include <stdlib.h>
 int main(void)
 {
-	ft_printf("%7*.*d\n", 1, 3, 5);
-	printf("%7*.*d\n", 1, 3, 5);
+	// printf("hello world %d\n", 10);
+	// printf("hello world %d\n", 10);
+	printf("asdf");
 	return (0);
 }
