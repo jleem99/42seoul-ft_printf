@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:54:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 00:10:20 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 02:41:37 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@
 
 void	print_char(t_printer *printer, t_specifier *specifier)
 {
+	char const	c = va_arg(*printer->ap, int);
+
 	if (!specifier->f_minus)
-		while (--specifier->width > 0)
-			printer_putc(printer, ' ');
-	printer_putc(printer, va_arg(*printer->ap, int));
-	if (specifier->f_minus)
-		while (--specifier->width > 0)
-			printer_putc(printer, ' ');
+	{
+		print_pad(1, printer, specifier);
+		printer_putc(printer, c);
+	}
+	else
+	{
+		printer_putc(printer, c);
+		print_pad(1, printer, specifier);
+	}
 }
 
 void	print_str(t_printer *printer, t_specifier *specifier) // validate malloc
@@ -48,14 +53,13 @@ void	print_str(t_printer *printer, t_specifier *specifier) // validate malloc
 
 void	print_ptr(t_printer *printer, t_specifier *specifier) // validate malloc
 {
-	char	*str;
-	void	*ptr;
+	void *const	ptr = va_arg(*printer->ap, void *);
+	char		*str;
 
-	ptr = va_arg(*printer->ap, void *);
-	if (!ptr)
-		str = ft_strdup("0");
+	if (ptr)
+		str = ft_uimtoa_16(ptr, 'a');
 	else
-		str = ft_uimtoa_16((uintmax_t)ptr, 'a');
+		str = ft_strdup("0");
 	specifier->f_pound = 1;
 	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
@@ -64,17 +68,16 @@ void	print_ptr(t_printer *printer, t_specifier *specifier) // validate malloc
 
 void	print_nchar(t_printer *printer, t_specifier *specifier)
 {
-	int		*nchar;
+	int *const	nchar_ptr = va_arg(*printer->ap, int *);
 
-	nchar = va_arg(*printer->ap, int *);
-	*nchar = printer->nchar;
+	*nchar_ptr = printer->nchar;
 }
 
 void	print_percent(t_printer *printer, t_specifier *specifier) // validate malloc
 {
 	char	*str;
 
-	if (!specifier->f_minus && specifier->width > 1 && specifier->f_zero)
+	if (!specifier->f_minus && specifier->f_zero)
 	{
 		str = malloc(specifier->width + 1); // check
 		ft_memset(str, '0', specifier->width - 1);

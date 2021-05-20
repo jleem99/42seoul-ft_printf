@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:15:56 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/18 20:09:15 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 03:47:41 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct	s_specifier
 	char		f_space;
 	char		f_pound;
 	char		f_zero;
+	char		apply_pound;
+	char		apply_zero;
 	int			width;
 	int			precision;
 	int			length;
@@ -53,6 +55,7 @@ t_specifier		*parse_specifier(t_printer *printer);
 /*
 ** Utility Functions
 */
+void			resolve_specifier(t_specifier *specifier);
 static int		is_specifier(t_specifier *specifier);
 int				is_integer(t_specifier *specifier);
 int				is_float(t_specifier *specifier);

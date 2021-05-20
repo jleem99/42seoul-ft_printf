@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 20:34:49 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/22 04:28:52 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 02:57:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ typedef struct s_printer	t_printer;
 typedef struct s_specifier	t_specifier;
 
 void	print(char const *str, t_printer *printer, t_specifier *specifier);
+void	print_pad(int slen, t_printer *printer, t_specifier *specifier);
+void	print_pad_left(int slen, t_printer *printer, t_specifier *specifier);
+void	print_pad_right(int slen, t_printer *printer, t_specifier *specifier);
+
 void	print_integer(t_printer *printer, t_specifier *specifier);
 void	print_float(t_printer *printer, t_specifier *specifier);
 void	print_char(t_printer *printer, t_specifier *specifier);

@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"print.h": "c",
+		"stdint.h": "c",
+		"libft.h": "c",
+		"limits": "c",
+		"type_traits": "cpp",
+		"specifier.h": "c"
+	}
+}

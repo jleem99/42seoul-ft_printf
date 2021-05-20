@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/18 20:07:25 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 03:46:29 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int		parse_flag(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
-	// printer->fmt_idx = printer->spec_idx;
 	c = printer_getc(printer);
 	while (ft_strchr("-+ #0", c))
 	{
@@ -43,7 +42,6 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
 
-	// printer->fmt_idx = printer->spec_idx;
 	specifier->width = -1;
 	c = printer_getc(printer);
 	if (c == '*')
@@ -73,7 +71,6 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 	char	c;
 	int		sig;
 
-	// printer->fmt_idx = printer->spec_idx;
 	specifier->precision = -1;
 	sig = 1;
 	if (!printer_chkc(printer, '.'))
@@ -102,7 +99,6 @@ static int		parse_precision(t_specifier *specifier, t_printer *printer)
 
 static int		parse_length(t_specifier *specifier, t_printer *printer)
 {
-	// printer->fmt_idx = printer->spec_idx;
 	if (printer_chkc(printer, 'h'))
 	{
 		specifier->length = 2;
@@ -151,5 +147,6 @@ t_specifier		*parse_specifier(t_printer *printer)
 	}
 	specifier->specifier = printer_getc(printer);
 	printer_popc(printer);
+	resolve_specifier(specifier);
 	return (specifier);
 }

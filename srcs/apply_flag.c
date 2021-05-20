@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/20 23:53:44 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 03:51:51 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 {
-	if (specifier->f_zero && specifier->precision == -1 && !specifier->f_minus)
+	if (specifier->apply_zero)
 		apply_flag_zero(pstr, specifier, isneg);
 	if (isneg)
 		apply_neg(pstr);
