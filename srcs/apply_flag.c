@@ -6,12 +6,13 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 03:51:51 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 04:05:02 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "apply_specifier.h"
 #include "specifier.h"
+#include "libft.h"
 
 void	apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 {
