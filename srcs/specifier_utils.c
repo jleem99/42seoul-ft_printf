@@ -3,8 +3,10 @@
 
 void		resolve_specifier(t_specifier *specifier)
 {
-	specifier->apply_zero =
+	specifier->apply_zero = is_integer(specifier) &&
 		specifier->f_zero && specifier->precision == -1 && !specifier->f_minus;
+	specifier->apply_pound = ft_strchr("oxXp", specifier->specifier) &&
+		specifier->f_pound;
 }
 
 static int	is_specifier(t_specifier *specifier)

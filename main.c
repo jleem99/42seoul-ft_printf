@@ -36,6 +36,9 @@ int main(void)
 
 	TEST("%3c", 'a');
 	TEST("%02%");
+	TEST("%p", 0x123a);
+	TEST("%.p", NULL);
+	TEST("%.d", 0);
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 19:06:05 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/25 00:47:55 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 15:58:51 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 
 void		apply_precision_integer(char **pstr, t_specifier *specifier)
 {
-	char	*str_new;
+	char		*str_new;
+	int const	slen = ft_strlen(*pstr);
 
-	if (**pstr == '\0' && specifier->precision == -1)
-		str_new = ft_strdup("0"); // malloc check
-	else if (specifier->precision <= (int)ft_strlen(*pstr))
-		return ;
-	else
+	if (slen == 0 && specifier->precision == -1)
+	{
+		free(*pstr);
+		*pstr = ft_strdup("0"); // malloc check
+	}
+	else if (specifier->precision > slen)
 	{
 		str_new = malloc(specifier->precision + 1); // malloc check ctrl f malloc
-		ft_memset(str_new, '0', specifier->precision - ft_strlen(*pstr));
-		ft_strcpy(str_new + specifier->precision - ft_strlen(*pstr), *pstr);
+		ft_memset(str_new, '0', specifier->precision - slen);
+		ft_strcpy(str_new + specifier->precision - slen, *pstr);
+		free(*pstr);
+		*pstr = str_new;
 	}
-	free(*pstr);
-	*pstr = str_new;
 }
