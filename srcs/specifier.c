@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 03:46:29 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 23:10:56 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ static int		parse_width(t_specifier *specifier, t_printer *printer)
 static int		parse_precision(t_specifier *specifier, t_printer *printer)
 {
 	char	c;
-	int		sig;
 
 	specifier->precision = -1;
-	sig = 1;
 	if (!printer_chkc(printer, '.'))
 		return (1);
 	c = printer_getc(printer);

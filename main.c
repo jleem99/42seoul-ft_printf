@@ -40,6 +40,7 @@ int main(void)
 	TEST("%.p", NULL);
 	TEST("%.d", 0);
 	TEST("%20.30p", 0x1234f);
+	TEST("% +20.30q %d%d", 0x1234f, 1234, 4321);
 
 	return (0);
 }
