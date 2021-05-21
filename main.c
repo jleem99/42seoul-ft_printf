@@ -39,6 +39,7 @@ int main(void)
 	TEST("%p", 0x123a);
 	TEST("%.p", NULL);
 	TEST("%.d", 0);
+	TEST("%20.30p", 0x1234f);
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:54:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 10:50:27 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:00:35 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "print.h"
 #include "specifier.h"
 #include "apply_specifier.h"
+#include "int_to_str.h"
 #include "libft.h"
 #include <stdlib.h>
 #include <stdarg.h>
@@ -56,7 +57,7 @@ void	print_ptr(t_printer *printer, t_specifier *specifier) // validate malloc
 	void *const	ptr = va_arg(*printer->ap, void *);
 	char		*str;
 
-	str = ft_uimtoa_16(ptr, 'a');
+	str = uintmax_to_str_16(ptr, 'a');
 	apply_precision_integer(&str, specifier);
 	apply_flag_pound(&str, specifier);
 	print(str, printer, specifier);

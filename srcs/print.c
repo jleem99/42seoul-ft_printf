@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 21:55:34 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 10:09:06 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 21:51:55 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,10 @@ void	print(char const *str, t_printer *printer, t_specifier *specifier)
 {
 	int const	slen = ft_strlen(str);
 
-	print_pad_left(slen, printer, specifier);
-	while (*str)
-		printer_putc(printer, *(str++));
-	print_pad_right(slen, printer, specifier);
-}
-
-void	print_pad_left(int slen, t_printer *printer, t_specifier *specifier)
-{
 	if (!specifier->f_minus && !specifier->apply_zero)
 		print_pad(slen, printer, specifier);
-}
-
-void	print_pad_right(int slen, t_printer *printer, t_specifier *specifier)
-{
+	while (*str)
+		printer_putc(printer, *(str++));
 	if (specifier->f_minus)
 		print_pad(slen, printer, specifier);
 }

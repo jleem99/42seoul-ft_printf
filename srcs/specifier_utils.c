@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specifier_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/21 22:03:26 by jleem             #+#    #+#             */
+/*   Updated: 2021/05/21 22:03:38 by jleem            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "specifier.h"
 #include "libft.h"
 
@@ -21,5 +33,5 @@ int			is_integer(t_specifier *specifier)
 
 int			is_float(t_specifier *specifier)
 {
-	return	(ft_strchr("fFeEgGaA", specifier->specifier) != NULL);
+	return (ft_strchr("fFeEgGaA", specifier->specifier) != NULL);
 }

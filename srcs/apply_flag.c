@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 16:07:36 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:02:35 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 		apply_flag_zero(pstr, specifier, isneg);
 	if (isneg)
 		apply_neg(pstr);
-	else 
+	else
 	{
 		if (specifier->apply_pound)
 			apply_flag_pound(pstr, specifier);

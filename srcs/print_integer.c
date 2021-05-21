@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/24 23:58:04 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:03:14 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "apply_specifier.h"
 #include "libft.h"
 #include "getarg.h"
+#include "int_to_str.h"
 
 static void	print_d(t_printer *printer, t_specifier *specifier)
 {
@@ -24,9 +25,9 @@ static void	print_d(t_printer *printer, t_specifier *specifier)
 
 	integer = getarg_integer(printer, specifier);
 	if (integer > 0)
-		str = ft_uimtoa_10(integer);
+		str = uintmax_to_str_10(integer);
 	else
-		str = ft_uimtoa_10(-integer);
+		str = uintmax_to_str_10(-integer);
 	apply_precision_integer(&str, specifier);
 	apply_flag_integer(&str, specifier, integer < 0);
 	print(str, printer, specifier);
@@ -39,7 +40,7 @@ static void	print_o(t_printer *printer, t_specifier *specifier)
 	char		*str;
 
 	integer = getarg_uinteger(printer, specifier);
-	str = ft_uimtoa_8(integer);
+	str = uintmax_to_str_8(integer);
 	apply_precision_integer(&str, specifier);
 	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
@@ -52,7 +53,7 @@ static void	print_u(t_printer *printer, t_specifier *specifier)
 	char		*str;
 
 	integer = getarg_uinteger(printer, specifier);
-	str = ft_uimtoa_10(integer);
+	str = uintmax_to_str_10(integer);
 	apply_precision_integer(&str, specifier);
 	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
@@ -66,9 +67,9 @@ static void	print_x(t_printer *printer, t_specifier *specifier)
 
 	integer = getarg_uinteger(printer, specifier);
 	if (specifier->specifier == 'x')
-		str = ft_uimtoa_16(integer, 'a');
+		str = uintmax_to_str_16(integer, 'a');
 	else
-		str = ft_uimtoa_16(integer, 'A');
+		str = uintmax_to_str_16(integer, 'A');
 	apply_precision_integer(&str, specifier);
 	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
