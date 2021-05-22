@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 00:24:58 by jleem             #+#    #+#             */
-/*   Updated: 2021/02/24 00:53:22 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/22 19:19:25 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ intmax_t	getarg_integer(t_printer *printer, t_specifier *specifier)
 	else if (specifier->length == 7)
 		return (va_arg(*printer->ap, ptrdiff_t));
 	else
-		return (0);
+		return (va_arg(*printer->ap, int));
 }
 
 uintmax_t	getarg_uinteger(t_printer *printer, t_specifier *specifier)
@@ -48,5 +48,13 @@ uintmax_t	getarg_uinteger(t_printer *printer, t_specifier *specifier)
 	else if (specifier->length == 7)
 		return (va_arg(*printer->ap, ptrdiff_t));
 	else
-		return (0);
+		return (va_arg(*printer->ap, unsigned int));
+}
+
+double		getarg_float(t_printer *printer, t_specifier *specifier)
+{
+	if (specifier->length < 8)
+		return (va_arg(*printer->ap, double));
+	else
+		return (va_arg(*printer->ap, long double));
 }
