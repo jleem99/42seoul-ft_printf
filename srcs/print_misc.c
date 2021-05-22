@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:54:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 23:20:18 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/22 19:16:26 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 void	print_char(t_printer *printer, t_specifier *specifier)
 {
@@ -66,8 +67,26 @@ void	print_ptr(t_printer *printer, t_specifier *specifier) // validate malloc
 
 void	print_nchar(t_printer *printer, t_specifier *specifier)
 {
-	(void)specifier;
-	*((int *)va_arg(*printer->ap, int *)) = printer->nchar;
+	void *const	nptr = va_arg(*printer->ap, void *);
+
+	if (specifier->length == 0)
+		*((int *)nptr) = printer->nchar;
+	else if (specifier->length == 1)
+		*((char *)nptr) = printer->nchar;
+	else if (specifier->length == 2)
+		*((short *)nptr) = printer->nchar;
+	else if (specifier->length == 3)
+		*((long *)nptr) = printer->nchar;
+	else if (specifier->length == 4)
+		*((long long *)nptr) = printer->nchar;
+	else if (specifier->length == 5)
+		*((intmax_t *)nptr) = printer->nchar;
+	else if (specifier->length == 6)
+		*((size_t *)nptr) = printer->nchar;
+	else if (specifier->length == 7)
+		*((ptrdiff_t *)nptr) = printer->nchar;
+	else
+		*((int *)nptr) = printer->nchar;
 }
 
 void	print_percent(t_printer *printer, t_specifier *specifier) // validate malloc
