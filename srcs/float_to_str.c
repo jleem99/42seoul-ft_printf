@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/23 14:38:01 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/23 16:13:44 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ char	*long_double_to_str_10(long double flt, int precision)
 	
 	int num = flt;
 
-	8.5
-	1000.1
-	1.0001 * 2^2
-	1101100100110100100100100010010001
+	// 8.5
+	// 1000.1
+	// 1.0001 * 2^2
+	// 1101100100110100100100100010010001
 
 	exponent = get_unbiased_exponent(ieee854);
 	ieee854.ieee.mantissa0;
