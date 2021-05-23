@@ -5,6 +5,7 @@
 		"libft.h": "c",
 		"limits": "c",
 		"type_traits": "cpp",
-		"specifier.h": "c"
+		"specifier.h": "c",
+		"float_to_str.h": "c"
 	}
 }

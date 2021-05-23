@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 00:24:58 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/22 19:19:25 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/23 00:40:59 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ uintmax_t	getarg_uinteger(t_printer *printer, t_specifier *specifier)
 		return (va_arg(*printer->ap, unsigned int));
 }
 
-double		getarg_float(t_printer *printer, t_specifier *specifier)
+long double	getarg_float(t_printer *printer, t_specifier *specifier)
 {
 	if (specifier->length < 8)
 		return (va_arg(*printer->ap, double));
