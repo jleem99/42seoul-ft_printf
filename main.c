@@ -50,9 +50,9 @@ void	inspect_bit(t_itype val)
 
 int main(void)
 {
-	long_double_to_str_10(1.0L/0.0L, 10);
-	printf("\n");
-	long_double_to_str_10(-8.5L, 10);
+	// long_double_to_str_10(1.0L/0.0L, 10);
+	// printf("\n");
+	long_double_to_str_10(-123.5L, 10);
 	printf("\n");
 	long_double_to_str_10(8.75L, 10);
 
