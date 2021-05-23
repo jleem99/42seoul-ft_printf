@@ -6,14 +6,20 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 03:24:23 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/23 16:13:30 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/23 17:10:29 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FLOAT_TO_STR_H
 # define FLOAT_TO_STR_H
 
-# include <bits/endian.h>
+# ifdef __linux__
+#  include <bits/endian.h>
+# elif defined __APPLE__
+#  include <machine/endian.h>
+# else
+#  include <machine/endian.h>
+# endif
 
 typedef unsigned int	t_size;
 
@@ -23,64 +29,19 @@ typedef union	u_ieee754_double
 
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		t_size	negative:1;
-		t_size	exponent:11;
-		t_size	mantissa0:20;
-		t_size	mantissa1:32;
-
-# endif
-# if __BYTE_ORDER == __LITTLE_ENDIAN
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		t_size	mantissa0:20;
-		t_size	exponent:11;
-		t_size	negative:1;
-		t_size	mantissa1:32;
-
-#  else
-
 		t_size	mantissa1:32;
 		t_size	mantissa0:20;
 		t_size	exponent:11;
 		t_size	negative:1;
-
-#  endif
-# endif
-
 	}			ieee;
 
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		t_size	negative:1;
-		t_size	exponent:11;
-		t_size	quiet_nan:1;
-		t_size	mantissa0:19;
-		t_size	mantissa1:32;
-
-# else
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		t_size	mantissa0:19;
-		t_size	quiet_nan:1;
-		t_size	exponent:11;
-		t_size	negative:1;
-		t_size	mantissa1:32;
-
-#  else
-
 		t_size	mantissa1:32;
 		t_size	mantissa0:19;
 		t_size	quiet_nan:1;
 		t_size	exponent:11;
 		t_size	negative:1;
-
-#  endif
-# endif
-
 	}			ieee_nan;
 }				t_ieee754;
 
@@ -92,62 +53,15 @@ typedef union	u_ieee854_long_double
 
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		t_size	negative:1;
-		t_size	exponent:15;
-		t_size	empty:16;
-		t_size	mantissa0:32;
-		t_size	mantissa1:32;
-# endif
-# if __BYTE_ORDER == __LITTLE_ENDIAN
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		t_size	exponent:15;
-		t_size	negative:1;
-		t_size	empty:16;
-		t_size	mantissa0:32;
-		t_size	mantissa1:32;
-
-#  else
-
 		t_size	mantissa1:32;
 		t_size	mantissa0:32;
 		t_size	exponent:15;
 		t_size	negative:1;
 		t_size	empty:16;
-
-#  endif
-# endif
-
 	}			ieee;
 
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		t_size	negative:1;
-		t_size	exponent:15;
-		t_size	empty:16;
-		t_size	one:1;
-		t_size	quiet_nan:1;
-		t_size	mantissa0:30;
-		t_size	mantissa1:32;
-
-# endif
-# if __BYTE_ORDER == __LITTLE_ENDIAN
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		t_size	exponent:15;
-		t_size	negative:1;
-		t_size	empty:16;
-		t_size	mantissa0:30;
-		t_size	quiet_nan:1;
-		t_size	one:1;
-		t_size	mantissa1:32;
-
-#  else
-
 		t_size	mantissa1:32;
 		t_size	mantissa0:30;
 		t_size	quiet_nan:1;
@@ -155,10 +69,6 @@ typedef union	u_ieee854_long_double
 		t_size	exponent:15;
 		t_size	negative:1;
 		t_size	empty:16;
-
-#  endif
-# endif
-
 	}			ieee_nan;
 }				t_ieee854;
 

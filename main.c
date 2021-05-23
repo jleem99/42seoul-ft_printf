@@ -23,13 +23,15 @@
 #include <math.h>
 #include <libft.h>
 
-typedef __uint128_t	t_itype;
-void	inspect_bit(double val)
+typedef __uint128_t	t_mtype;
+typedef float		t_itype;
+void	inspect_bit(t_itype val)
 {
-	t_itype	bitmask = (t_itype)0b1 << (sizeof(t_itype) * 8 - 1);
-	t_itype	b;
+	t_mtype	bitmask = (t_mtype)0b1 << (sizeof(t_mtype) * 8 - 1);
+	t_mtype	b;
 
-	ft_memcpy(&b, &val, sizeof(val));
+	ft_bzero(&b, sizeof(t_mtype));
+	ft_memcpy(&b, &val, sizeof(t_itype));
 	char counter = 0;
 	for (; bitmask != 0; bitmask >>= 1)
 	{
@@ -43,23 +45,26 @@ void	inspect_bit(double val)
 	printf("\n");
 }
 
+#include "bigint.h"
+#include "float_to_str.h"
+
 int main(void)
 {
-	INIT_TEST();
+	long_double_to_str_10(1.0L/0.0L, 10);
+	printf("\n");
+	long_double_to_str_10(-8.5L, 10);
+	printf("\n");
+	long_double_to_str_10(8.75L, 10);
 
-	// printf("hello world %d\n", 10);
-	// printf("hello world %d\n", 10);
-	ft_printf("asdf");
 
-	uintmax_t umaxint = UINTMAX_MAX;
 
-	TEST("%ju", umaxint);
 
-	TEST("%s", (char *)0);
-	printf("%llu\n", ULLONG_MAX);
 
-	inspect_bit(8.5);
 
+
+
+
+	// INIT_TEST();
 	// TEST("%3c", 'a');
 	// TEST("%02%");
 	// TEST("%p", 0x123a);
@@ -81,6 +86,6 @@ int main(void)
 	// 	num /= 10;
 	// }
 
-	printf("%d vs %d vs %d\n", sizeof(float), sizeof(double), sizeof(long double));
+	// printf("%d vs %d vs %d\n", sizeof(float), sizeof(double), sizeof(long double));
 	return (0);
 }
