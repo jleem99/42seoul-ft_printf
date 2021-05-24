@@ -6,12 +6,31 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 21:56:17 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/23 21:56:48 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 03:45:37 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
 #include "libft.h"
+
+void		bigint_add_with_index(t_bigint *bigint, uint8_t addend, size_t byteidx)
+{	
+	bigint_set_digit(bigint, bigint->data[byteidx] + addend, byteidx);
+}
+
+void		bigint_multiply(t_bigint *bigint, uint8_t multiplier)
+{
+	ssize_t		byteidx;
+	uint16_t	product;
+
+	byteidx = bigint->size - 1;
+	while (byteidx >= 0)
+	{
+		product = bigint->data[byteidx] * multiplier;
+		bigint_set_digit(bigint, product, byteidx);
+		byteidx--;
+	}
+}
 
 void		bigint_shift_bytes(t_bigint *bigint, int bytes)
 {
@@ -42,41 +61,11 @@ static void	bigint_shift_bits_internal(t_bigint *bigint, int bits)
 	}
 }
 
-void		bigint_shift(t_bigint *bigint, t_size bits)
+void		bigint_shift(t_bigint *bigint, size_t bits)
 {
-	t_size const	bytes_to_push = bits / 8;
-	t_size const	bits_to_push = bits - 8 * bytes_to_push;
+	size_t const	bytes_to_push = bits / 8;
+	size_t const	bits_to_push = bits % 8;
 
 	bigint_shift_bytes(bigint, bytes_to_push);
 	bigint_shift_bits_internal(bigint, bits_to_push);
-}
-
-void		bigint_inspect_byte(t_bigint *bigint, t_size byteidx)
-{
-	int		bitmask;
-	int		bit;
-
-	bitmask = 0b10000000;
-	while (bitmask != 0)
-	{
-		bit = (bigint->data[byteidx] & bitmask) != 0;
-		ft_putchar_fd(bit + '0', 1);
-		bitmask >>= 1;
-	}
-}
-
-void		bigint_inspect(t_bigint *bigint)
-{
-	t_size	i;
-
-	i = 0;
-	while (i < bigint->size)
-	{
-		if (i % 4 == 0)
-			ft_putchar_fd('\n', 1);
-		else
-			ft_putchar_fd(' ', 1);
-		bigint_inspect_byte(bigint, (bigint->size - 1 - i));
-		i++;
-	}
 }
