@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:30 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 03:45:36 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 05:30:38 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ void		bigint_set_value(t_bigint *bigint, uint64_t value)
 	ft_memcpy(bigint->data, &value, 8);
 }
 
-void		bigint_set_digit(t_bigint *bigint, uint8_t value, size_t byteidx)
+/*
+** Note: uint8_t carry can overflow when not used internally
+*/
+
+void		bigint_set_digit(t_bigint *bigint, uint16_t value, size_t byteidx)
 {
 	size_t const	carry_byteidx = byteidx + 1;
 	uint8_t			carry;

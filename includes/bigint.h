@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 03:45:13 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 05:31:31 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ t_bigint	*make_bigint(size_t size);
 void		free_bigint(t_bigint *bigint);
 void		bigint_resize(t_bigint *bigint, size_t new_size);
 void		bigint_set_value(t_bigint *bigint, uint64_t value);
-void		bigint_set_digit(t_bigint *bigint, uint8_t value, size_t byteidx);
+void		bigint_set_digit(t_bigint *bigint, uint16_t value, size_t byteidx);
 
+void		bigint_add(t_bigint *bigint, t_bigint *addend);
 void		bigint_add_with_index(t_bigint *bigint, uint8_t addend, size_t byteidx);
 void		bigint_multiply(t_bigint *bigint, uint8_t multiplier);
+
 void		bigint_shift_bytes(t_bigint *bigint, int bytes);
 void		bigint_shift(t_bigint *bigint, size_t bits);
 
