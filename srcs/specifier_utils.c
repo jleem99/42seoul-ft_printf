@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 22:03:26 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 23:19:07 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:06:36 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 
 void	resolve_specifier(t_specifier *specifier)
 {
-	specifier->apply_zero = is_integer(specifier) &&
-		specifier->f_zero && specifier->precision == -1 && !specifier->f_minus;
-	specifier->apply_pound = ft_strchr("oxXp", specifier->specifier) &&
-		specifier->f_pound;
+	if (is_integer(specifier))
+	{
+		specifier->apply_zero = specifier->f_zero &&
+			specifier->precision == -1 && !specifier->f_minus;
+		specifier->apply_pound = ft_strchr("oxXp", specifier->specifier) &&
+			specifier->f_pound;
+	}
+	else if (is_float(specifier))
+	{
+		specifier->apply_zero = specifier->f_zero &&
+			!specifier->f_minus;
+		specifier->apply_pound = specifier->f_pound &&
+			specifier->precision == 0;
+	}
 }
 
 int		is_specifier(t_specifier *specifier)

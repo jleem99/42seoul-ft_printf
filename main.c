@@ -50,21 +50,70 @@ void	inspect_bit(t_itype val)
 
 int main(void)
 {
-	long_double_to_str_10(1.0L/0.0L, 10);
-	printf("\n");
-	long_double_to_str_10(-8.5L, 10);
-	printf("\n");
-	long_double_to_str_10(8.75L, 10);
+	INIT_TEST();
+
+	// long double num = -11234.5891727419283478912371465745674567456234123L;
+	// TEST("%.70Lf", num);
+	// TEST("%Lf", num);
+	// TEST("%8.Lf", num);
+	// TEST("%#8.Lf", num);
+	// TEST("%+#8.Lf", num);
+	// TEST("% .Lf", num);
+	// TEST("%+ .Lf", num);
+	// TEST("%.70Lf", -num);
+	// TEST("%Lf", -num);
+	// TEST("%8.Lf", -num);
+	// TEST("%#8.Lf", -num);
+	// TEST("%+#8.Lf", -num);
+	// TEST("% .Lf", -num);
+	// TEST("%+ .Lf", -num);
+	// float numf = -11234.5891727419283478912371465745674567456234123f;
+	// TEST("%.70f", numf);
+	// TEST("%f", numf);
+	// TEST("%8.f", numf);
+	// TEST("%#8.f", numf);
+	// TEST("%+#8.f", numf);
+	// TEST("% .f", numf);
+	// TEST("%+ .f", numf);
+	// TEST("%.70f", -numf);
+	// TEST("%f", -numf);
+	// TEST("%8.f", -numf);
+	// TEST("%#8.f", -numf);
+	// TEST("%+#8.f", -numf);
+	// TEST("% .f", -numf);
+	// TEST("%+ .f", -numf);
+
+	test("%1f", -1.5);
+	test("%1f", -1.05);
+	test("%1f", -1.005);
+	test("%1f", -1.0625);
+	test("%1f", -14353453453423.899999999999999999999999999999999);
+	test("%1f", -14353453453423.0899999999999999999999999999999999);
+	test("%.0f", 0.5);
+	test("%.0f", 1.5);
+	test("%.0f", -0.5);
+	test("%.0f", -1.5);
 
 
 
+	test("% 0-7.1f", 7.3);
+	test("% 0#7.1f", 7.3);
+	test("%0#7.1f", 7.3);
+	// test("% 0#-05.3f", -0.0); // timeout
+	// test("% 0#-05.3f", 0.0); // timeout
+	test("%.10f", 23.000000041);
+	test("%.12f", 1.025978541236587568);
+	test("% +.3f", -7.3);
+	test("% 05.0f", -7.3);
+	test("%.1f", -3.85);
 
+	test("%.f", 0.4);
+	test("%.f", 0.5);
+	test("%.f", 0.6);
+	test("%.f", -0.4);
+	test("%.f", -0.5);
+	test("%.f", -0.6);
 
-
-
-
-
-	// INIT_TEST();
 	// TEST("%3c", 'a');
 	// TEST("%02%");
 	// TEST("%p", 0x123a);
@@ -77,14 +126,6 @@ int main(void)
 	// TEST("%f", __FLT_MAX__ + 1.0f);
 	// TEST("%f", __FLT_MAX__ + 2.0f);
 	// test("%.*f", -3, 3.1415926535);
-
-	// long double num = 1231234189237489172341928347891237123412341234419234.6;
-	// long double divider = 1;
-	// while (num > 10)
-	// {
-	// 	TEST("%Lf", num);
-	// 	num /= 10;
-	// }
 
 	// printf("%d vs %d vs %d\n", sizeof(float), sizeof(double), sizeof(long double));
 	return (0);

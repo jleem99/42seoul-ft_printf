@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:43:58 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 23:08:17 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:02:59 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,20 @@ void	apply_flag_zero(char **pstr, t_specifier *specifier, int isneg)
 	int			padlen;
 
 	padlen = specifier->width - slen;
-	if (specifier->apply_pound)
-	{
-		if (specifier->specifier == 'o')
-			padlen -= 1;
-		else
-			padlen -= 2;
-	}
-	else if (specifier->f_plus || specifier->f_space)
-		padlen -= 1;
 	if (isneg)
 		padlen -= 1;
+	else
+	{
+		if (specifier->apply_pound)
+		{
+			if (specifier->specifier == 'o')
+				padlen -= 1;
+			else
+				padlen -= 2;
+		}
+		else if (specifier->f_plus || specifier->f_space)
+			padlen -= 1;
+	}
 	if (padlen <= 0)
 		return ;
 	str_new = malloc(padlen + slen + 1); // malloc check ctrl f malloc

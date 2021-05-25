@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/23 03:43:33 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 04:38:11 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	print_f(t_printer *printer, t_specifier *specifier)
 	else
 		str = long_double_to_str_10(flt, specifier->precision);
 	
-	// apply_flag_float(&str, specifier, ...);
+	apply_flag_float(&str, specifier, ieee854_is_negative(flt));
 	print(str, printer, specifier);
 	free(str);
 }

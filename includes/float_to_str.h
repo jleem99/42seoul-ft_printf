@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 03:24:23 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 05:42:21 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 04:38:03 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ typedef union		u_ieee854_long_double
 # define IEEE854_LONG_DOUBLE_BIAS 0x3fff
 
 char				*long_double_to_str_10(long double flt, int precision);
+int					ieee854_is_negative(long double flt);
 
 #endif
