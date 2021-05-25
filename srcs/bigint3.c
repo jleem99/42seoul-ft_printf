@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:09:36 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 18:33:48 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 22:26:28 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,57 @@
 
 void		bigint_shift_bytes(t_bigint *bigint, int bytes)
 {
-	int		i;
-
-	i = bigint->size - 1;
-	while (i >= 0)
+	uint8_t *const	new_data = bigint_copy_data(bigint);
+	size_t			destidx;
+	size_t			srcidx;
+	
+	destidx = 0;
+	while (destidx < bigint->size)
 	{
-		if (i - bytes < 0)
-			bigint->data[i] = 0;
+		srcidx = destidx - bytes;
+		if ((bytes > 0 && destidx < bytes) || srcidx >= bigint->size)
+			new_data[destidx] = 0;
 		else
-			bigint->data[i] = bigint->data[i - bytes];
-		i--;
+			new_data[destidx] = bigint->data[srcidx];
+		destidx++;
 	}
+	free(bigint->data);
+	bigint->data = new_data;
 }
 
 static void	bigint_shift_bits_internal(t_bigint *bigint, int bits)
 {
-	int		i;
+	uint8_t *const	new_data = bigint_copy_data(bigint);
+	size_t			destidx;
+	size_t			srcidx;
 
-	i = bigint->size - 1;
-	while (i >= 0)
+	destidx = 0;
+	while (destidx < bigint->size)
 	{
-		bigint->data[i] <<= bits;
-		if (i - 1 >= 0)
-			bigint->data[i] |= (bigint->data[i - 1] >> (8 - bits));
-		i--;
+		if (bits > 0)
+		{
+			srcidx = destidx - 1;
+			new_data[destidx] <<= bits;
+			if (destidx >= 1)
+				new_data[destidx] |= (bigint->data[srcidx] >> (8 - bits));
+		}
+		else if (bits < 0)
+		{
+			srcidx = destidx + 1;
+			new_data[destidx] >>= (-bits);
+			if (srcidx < bigint->size)
+				new_data[destidx] |= (bigint->data[srcidx] << (8 - (-bits)));
+		}
+		destidx++;
 	}
+	free(bigint->data);
+	bigint->data = new_data;
 }
 
-void		bigint_shift(t_bigint *bigint, size_t bits)
+void		bigint_shift(t_bigint *bigint, int bits)
 {
-	size_t const	bytes_to_push = bits / 8;
-	size_t const	bits_to_push = bits % 8;
+	int const	bytes_to_push = bits / 8;
+	int const	bits_to_push = bits % 8;
 
 	bigint_shift_bytes(bigint, bytes_to_push);
 	bigint_shift_bits_internal(bigint, bits_to_push);
