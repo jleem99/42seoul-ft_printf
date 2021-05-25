@@ -6,12 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 22:38:06 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 23:06:15 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "float_to_str.h"
 #include "bigint.h"
+#include "libft_bonus.h"
+#include <stdlib.h>
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 {
@@ -68,7 +70,7 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854, int precision)
 	int			decimalifier;
 	int			digit_idx;
 
-	decimal = make_bigint(precision, 10);
+	decimal = make_bigint(0, 10);
 	if (unused_bits >= 64)
 		return (decimal);
 	mantissa_decimal = ieee854_get_mantissa(ieee854, unused_bits, 64);
@@ -81,27 +83,34 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854, int precision)
 	decimalifier = 64 - unused_bits;
 	while (decimalifier--)
 		bigint_multiply(decimal, 5);
-	bigint_shift_bytes(decimal, -(decimal->size - precision));
-	bigint_resize(decimal, precision);
+	bigint_resize_reverse(decimal, precision);
 	return (decimal);
 }
 
-#include <stdlib.h>
-char	*long_double_to_str_10(long double flt, int precision)
+static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
+{
+	char *const		integer_str = bigint_to_string(integer);
+	char *const		decimal_str = bigint_to_string(decimal);
+	size_t const	integer_len = ft_strlen(integer_str);
+	size_t const	decimal_len = ft_strlen(decimal_str);
+	char *const		str = malloc(integer_len + decimal_len + 2);
+
+	ft_strcpy(str, integer_str);
+	str[integer_len] = '.';
+	ft_strcpy(str + integer_len + 1, decimal_str);
+	free(integer_str);
+	free(decimal_str);
+	return (str);
+}
+
+char		*long_double_to_str_10(long double flt, int precision)
 {
 	t_ieee854 const	ieee854 = { flt };
 	t_bigint *const	integer = ieee854_get_integer_part(ieee854);
 	t_bigint *const	decimal = ieee854_get_decimal_part(ieee854, precision);
-	char *const		integer_str = bigint_to_string(integer);
-	char *const		decimal_str = bigint_to_string(decimal);
-	printf("%s.%s\n", integer_str, decimal_str);
-	free(integer_str);
-	free(decimal_str);
+	char *const		str = join_integer_decimal(integer, decimal);
+
 	free_bigint(integer);
 	free_bigint(decimal);
-}
-
-char		*long_double_to_str_16(long double flt, int precision)
-{
-	
+	return (str);
 }
