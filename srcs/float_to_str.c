@@ -6,23 +6,23 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 17:04:52 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 22:38:06 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "float_to_str.h"
 #include "bigint.h"
 
-int			get_unbiased_exponent(t_ieee854 ieee854)
+int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 {
 	return (ieee854.ieee.exponent - IEEE854_LONG_DOUBLE_BIAS);
 }
 
 /*
-** Get mantissa bits [start_bit, end_bit)
+** Get mantissa bits: [start_bit, end_bit)
 */
 
-uint64_t	get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
+uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 {
 	uint64_t	mantissa;
 
@@ -38,16 +38,16 @@ uint64_t	get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 	return (mantissa);
 }
 
-t_bigint	*long_double_get_integer_part(t_ieee854 ieee854)
+t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854)
 {
-	int const	num_bits = get_unbiased_exponent(ieee854) + 1;
+	int const	num_bits = ieee854_get_unbiased_exponent(ieee854) + 1;
 	int			leftover_bits;
 	uint64_t	mantissa_integer;
 	t_bigint	*integer;
 	int			digit_idx;
 
-	integer = make_bigint(0);
-	mantissa_integer = get_mantissa(ieee854, 0, num_bits);
+	integer = make_bigint(0, 10);
+	mantissa_integer = ieee854_get_mantissa(ieee854, 0, num_bits);
 	leftover_bits = num_bits - 64;
 	digit_idx = 0;
 	while (mantissa_integer != 0)
@@ -60,18 +60,18 @@ t_bigint	*long_double_get_integer_part(t_ieee854 ieee854)
 	return (integer);
 }
 
-t_bigint	*long_double_get_decimal_part(t_ieee854 ieee854)
+t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854, int precision)
 {
-	int const	unused_bits = get_unbiased_exponent(ieee854) + 1;
+	int const	unused_bits = ieee854_get_unbiased_exponent(ieee854) + 1;
 	uint64_t	mantissa_decimal;
 	t_bigint	*decimal;
 	int			decimalifier;
 	int			digit_idx;
 
-	decimal = make_bigint(0);
+	decimal = make_bigint(precision, 10);
 	if (unused_bits >= 64)
 		return (decimal);
-	mantissa_decimal = get_mantissa(ieee854, unused_bits, 64);
+	mantissa_decimal = ieee854_get_mantissa(ieee854, unused_bits, 64);
 	digit_idx = 0;
 	while (mantissa_decimal != 0)
 	{
@@ -81,17 +81,22 @@ t_bigint	*long_double_get_decimal_part(t_ieee854 ieee854)
 	decimalifier = 64 - unused_bits;
 	while (decimalifier--)
 		bigint_multiply(decimal, 5);
+	bigint_shift_bytes(decimal, -(decimal->size - precision));
+	bigint_resize(decimal, precision);
 	return (decimal);
 }
 
+#include <stdlib.h>
 char	*long_double_to_str_10(long double flt, int precision)
 {
 	t_ieee854 const	ieee854 = { flt };
-	t_bigint const	*integer = long_double_get_integer_part(ieee854);
-	t_bigint const	*decimal = long_double_get_decimal_part(ieee854, precision);
-
-	bigint_inspect_decimal(integer);
-	bigint_inspect_decimal(decimal);
+	t_bigint *const	integer = ieee854_get_integer_part(ieee854);
+	t_bigint *const	decimal = ieee854_get_decimal_part(ieee854, precision);
+	char *const		integer_str = bigint_to_string(integer);
+	char *const		decimal_str = bigint_to_string(decimal);
+	printf("%s.%s\n", integer_str, decimal_str);
+	free(integer_str);
+	free(decimal_str);
 	free_bigint(integer);
 	free_bigint(decimal);
 }

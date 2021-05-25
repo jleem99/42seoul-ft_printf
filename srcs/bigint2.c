@@ -6,12 +6,11 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 21:56:17 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 05:31:02 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 22:35:57 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
-#include <sys/types.h>
 
 void	bigint_add_with_index(t_bigint *bigint, uint8_t addend, size_t byteidx)
 {
