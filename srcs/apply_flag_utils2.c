@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   apply_flag_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 04:49:23 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:05:20 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:27:24 by dher             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "apply_specifier.h"
-#include "specifier.h";
+#include "specifier.h"
+#include "libft_bonus.h"
 
 void	apply_flag_zero_float(char **pstr, t_specifier *specifier, int isneg)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bigint_inspect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 03:44:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 17:12:49 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:28:24 by dher             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
+#include "libft.h"
 #include "ft_printf.h"
 
 void		bigint_inspect_byte(t_bigint const *bigint, size_t byteidx)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float_to_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:09:52 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:28:49 by dher             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 	return (mantissa);
 }
 
-static void	*convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa)
+static void	convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa)
 {
 	int const	base = bigint->base;
 	int			digit_idx;
@@ -78,7 +78,6 @@ t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854)
 static void	ieee854_decimalify(t_bigint *decimal, t_ieee854 ieee854)
 {
 	int const	num_bits = 64 - (ieee854_get_unbiased_exponent(ieee854) + 1);
-	uint64_t	mantissa = ieee854_get_mantissa(ieee854, 64 - num_bits, 64);
 	int			decimalifier;
 
 	decimalifier = 0;

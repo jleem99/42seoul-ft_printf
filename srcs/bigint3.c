@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bigint3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:09:36 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 22:26:28 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:28:05 by dher             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		bigint_shift_bytes(t_bigint *bigint, int bytes)
 	while (destidx < bigint->size)
 	{
 		srcidx = destidx - bytes;
-		if ((bytes > 0 && destidx < bytes) || srcidx >= bigint->size)
+		if ((bytes > 0 && destidx < (size_t)bytes) || srcidx >= bigint->size)
 			new_data[destidx] = 0;
 		else
 			new_data[destidx] = bigint->data[srcidx];

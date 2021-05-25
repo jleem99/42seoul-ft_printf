@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   print_float.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 04:38:11 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 05:29:51 by dher             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "printer.h"
 #include "specifier.h"
-#include "libft.h"
-#include <stdlib.h>
-
+#include "apply_specifier.h"
 #include "getarg.h"
 #include "float_to_str.h"
+#include <stdlib.h>
 
 static void	print_f(t_printer *printer, t_specifier *specifier)
 {
