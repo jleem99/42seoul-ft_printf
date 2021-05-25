@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 03:44:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 17:05:30 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 17:12:49 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		bigint_inspect_byte(t_bigint const *bigint, size_t byteidx)
 
 void		bigint_inspect_byte_decimal(t_bigint const *bigint, size_t byteidx)
 {
-	ft_printf("%3hhu", bigint->data[byteidx]);
+	ft_printf("%hhu", bigint->data[byteidx]);
 }
 
 void		bigint_inspect(t_bigint const *bigint)
