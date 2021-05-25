@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 23:06:15 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 01:39:28 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854)
 	return (integer);
 }
 
-t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854, int precision)
+t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854)
 {
 	int const	unused_bits = ieee854_get_unbiased_exponent(ieee854) + 1;
 	uint64_t	mantissa_decimal;
@@ -83,8 +83,23 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854, int precision)
 	decimalifier = 64 - unused_bits;
 	while (decimalifier--)
 		bigint_multiply(decimal, 5);
-	bigint_resize_reverse(decimal, precision);
 	return (decimal);
+}
+// Todo: round_idx < 0
+static void	round_number(t_bigint *integer, t_bigint *decimal, int precision)
+{
+	size_t const	round_idx = decimal->size - (precision + 1);
+	int				round = decimal->size > (precision + 1) &&
+							decimal->data[round_idx] >= 5;
+
+	if (round)
+	{
+		if (precision == 0)
+			integer->data[0] += round;
+		else
+			decimal->data[round_idx + 1] += round;
+	}
+	bigint_resize_reverse(decimal, precision);
 }
 
 static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
@@ -93,11 +108,19 @@ static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
 	char *const		decimal_str = bigint_to_string(decimal);
 	size_t const	integer_len = ft_strlen(integer_str);
 	size_t const	decimal_len = ft_strlen(decimal_str);
-	char *const		str = malloc(integer_len + decimal_len + 2);
+	char			*str;
 
-	ft_strcpy(str, integer_str);
-	str[integer_len] = '.';
-	ft_strcpy(str + integer_len + 1, decimal_str);
+	if (decimal_len > 0)
+	{
+		str = malloc(integer_len + decimal_len + 2);
+		ft_strcpy(str, integer_str);
+		str[integer_len] = '.';
+		ft_strcpy(str + integer_len + 1, decimal_str);
+	}
+	else
+	{
+		str = ft_strdup(integer_str);
+	}
 	free(integer_str);
 	free(decimal_str);
 	return (str);
@@ -107,9 +130,11 @@ char		*long_double_to_str_10(long double flt, int precision)
 {
 	t_ieee854 const	ieee854 = { flt };
 	t_bigint *const	integer = ieee854_get_integer_part(ieee854);
-	t_bigint *const	decimal = ieee854_get_decimal_part(ieee854, precision);
-	char *const		str = join_integer_decimal(integer, decimal);
+	t_bigint *const	decimal = ieee854_get_decimal_part(ieee854);
+	char			*str;
 
+	round_number(integer, decimal, precision);
+	str = join_integer_decimal(integer, decimal);
 	free_bigint(integer);
 	free_bigint(decimal);
 	return (str);
