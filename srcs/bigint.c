@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:30 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 17:06:33 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 19:57:27 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "libft.h"
 #include <stdlib.h>
 
-t_bigint	*make_bigint(size_t size)
+t_bigint	*make_bigint(size_t size, uint8_t base)
 {
 	t_bigint *const	bigint = malloc(sizeof(t_bigint));
 
 	bigint->data = ft_calloc(size, sizeof(uint8_t));
-	bigint->base = 10;
+	bigint->base = base;
 	bigint->size = size;
 	return (bigint);
 }
@@ -28,6 +28,22 @@ void		free_bigint(t_bigint *bigint)
 {
 	free(bigint->data);
 	free(bigint);
+}
+
+t_bigint	*bigint_copy(t_bigint *bigint)
+{
+	t_bigint *const	new_bigint = make_bigint(bigint->size, bigint->base);
+
+	ft_memcpy(new_bigint->data, bigint->data, bigint->size);
+	return (new_bigint);
+}
+
+uint8_t		*bigint_copy_data(t_bigint *bigint)
+{
+	uint8_t *const	new_data = malloc(bigint->size);
+	
+	ft_memcpy(new_data, bigint->data, bigint->size);
+	return (new_data);
 }
 
 void		bigint_resize(t_bigint *bigint, size_t new_size)
