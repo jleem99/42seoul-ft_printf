@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:30 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 05:30:38 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 17:06:33 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void		bigint_set_digit(t_bigint *bigint, uint16_t value, size_t byteidx)
 	uint8_t			carry;
 	uint8_t			remainder;
 
+	if (byteidx >= bigint->size)
+		bigint_resize(bigint, byteidx + 1);
 	if (value < bigint->base)
 	{
 		bigint->data[byteidx] = value;
