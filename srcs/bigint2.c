@@ -6,13 +6,13 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 21:56:17 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 22:35:57 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 02:16:36 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
 
-void	bigint_add_with_index(t_bigint *bigint, uint8_t addend, size_t byteidx)
+void	bigint_add_digit(t_bigint *bigint, uint8_t addend, size_t byteidx)
 {
 	uint16_t	sum;
 

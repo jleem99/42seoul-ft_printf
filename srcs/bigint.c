@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:30 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 23:06:42 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 02:02:02 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		bigint_set_digit(t_bigint *bigint, uint16_t value, size_t byteidx)
 			bigint_resize(bigint, bigint->size + 1);
 		carry = value / bigint->base;
 		remainder = value % bigint->base;
-		bigint_add_with_index(bigint, carry, carry_byteidx);
+		bigint_add_digit(bigint, carry, carry_byteidx);
 		bigint->data[byteidx] = remainder;
 	}
 }
