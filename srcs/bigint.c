@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:30 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 19:57:27 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 23:06:42 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ void		bigint_resize(t_bigint *bigint, size_t new_size)
 		ft_memcpy(new_data, bigint->data, bigint->size);
 	else
 		ft_memcpy(new_data, bigint->data, new_size);
+	free(bigint->data);
+	bigint->data = new_data;
+	bigint->size = new_size;
+}
+
+void		bigint_resize_reverse(t_bigint *bigint, size_t new_size)
+{
+	uint8_t *const	new_data = ft_calloc(new_size, sizeof(uint8_t));
+	int const		delta_size = new_size - bigint->size;
+
+	if (new_size > bigint->size)
+		ft_memcpy(new_data + delta_size, bigint->data, bigint->size);
+	else
+		ft_memcpy(new_data, bigint->data - delta_size, new_size);
 	free(bigint->data);
 	bigint->data = new_data;
 	bigint->size = new_size;

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 21:16:35 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 23:02:49 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		free_bigint(t_bigint *bigint);
 t_bigint	*bigint_copy(t_bigint *bigint);
 uint8_t		*bigint_copy_data(t_bigint *bigint);
 void		bigint_resize(t_bigint *bigint, size_t new_size);
+void		bigint_resize_reverse(t_bigint *bigint, size_t new_size);
 void		bigint_set_value(t_bigint *bigint, uint64_t value);
 void		bigint_set_digit(t_bigint *bigint, uint16_t value, size_t byteidx);
 
