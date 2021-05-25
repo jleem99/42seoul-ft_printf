@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 05:31:31 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 17:05:24 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void		bigint_multiply(t_bigint *bigint, uint8_t multiplier);
 void		bigint_shift_bytes(t_bigint *bigint, int bytes);
 void		bigint_shift(t_bigint *bigint, size_t bits);
 
-void		bigint_inspect_byte(t_bigint *bigint, size_t byteidx);
-void		bigint_inspect_byte_decimal(t_bigint *bigint, size_t byteidx);
-void		bigint_inspect(t_bigint *bigint);
-void		bigint_inspect_decimal(t_bigint *bigint);
+void		bigint_inspect_byte(t_bigint const *bigint, size_t byteidx);
+void		bigint_inspect_byte_decimal(t_bigint const *bigint, size_t byteidx);
+void		bigint_inspect(t_bigint const *bigint);
+void		bigint_inspect_decimal(t_bigint const *bigint);
 
 #endif

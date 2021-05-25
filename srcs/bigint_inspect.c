@@ -6,14 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 03:44:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/25 03:44:53 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/25 17:05:30 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
 #include "ft_printf.h"
 
-void		bigint_inspect_byte(t_bigint *bigint, size_t byteidx)
+void		bigint_inspect_byte(t_bigint const *bigint, size_t byteidx)
 {
 	int		bitmask;
 	int		bit;
@@ -27,12 +27,12 @@ void		bigint_inspect_byte(t_bigint *bigint, size_t byteidx)
 	}
 }
 
-void		bigint_inspect_byte_decimal(t_bigint *bigint, size_t byteidx)
+void		bigint_inspect_byte_decimal(t_bigint const *bigint, size_t byteidx)
 {
 	ft_printf("%3hhu", bigint->data[byteidx]);
 }
 
-void		bigint_inspect(t_bigint *bigint)
+void		bigint_inspect(t_bigint const *bigint)
 {
 	size_t	i;
 
@@ -49,7 +49,7 @@ void		bigint_inspect(t_bigint *bigint)
 	ft_putchar_fd('\n', 1);
 }
 
-void		bigint_inspect_decimal(t_bigint *bigint)
+void		bigint_inspect_decimal(t_bigint const *bigint)
 {
 	size_t	i;
 
