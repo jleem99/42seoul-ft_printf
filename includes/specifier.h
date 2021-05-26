@@ -6,12 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:15:56 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 23:19:11 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:27:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPECIFIER_H
 # define SPECIFIER_H
+
+# include <stdint.h>
 
 typedef struct s_printer	t_printer;
 
@@ -38,13 +40,13 @@ typedef struct s_printer	t_printer;
 typedef struct	s_specifier
 {
 	char		specifier;
-	char		f_minus;
-	char		f_plus;
-	char		f_space;
-	char		f_pound;
-	char		f_zero;
-	char		apply_pound;
-	char		apply_zero;
+	uint8_t		f_minus		: 1;
+	uint8_t		f_plus		: 1;
+	uint8_t		f_space		: 1;
+	uint8_t		f_pound		: 1;
+	uint8_t		f_zero		: 1;
+	uint8_t		apply_pound	: 1;
+	uint8_t		apply_zero	: 1;
 	int			width;
 	int			precision;
 	int			length;
