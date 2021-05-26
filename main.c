@@ -52,7 +52,6 @@ int main(void)
 {
 	INIT_TEST();
 
-	sizeof(t_specifier);
 	// long double num = -11234.5891727419283478912371465745674567456234123L;
 	// TEST("%.70Lf", num);
 	// TEST("%Lf", num);

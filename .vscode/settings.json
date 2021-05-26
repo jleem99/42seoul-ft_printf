@@ -20,6 +20,7 @@
 		"types.h": "c",
 		"apply_specifier.h": "c",
 		"cmath": "c",
-		"ios": "c"
+		"ios": "c",
+		"libft_bonus.h": "c"
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 10:44:29 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:37:51 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "apply_specifier.h"
 #include "specifier.h"
-#include "libft.h"
+#include "libft_bonus.h"
 
 void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 {
@@ -33,7 +33,7 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 
 void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 {
-	if (ft_strncmp(*pstr, "inf", 3) == 0 || ft_strncmp(*pstr, "nan", 3) == 0)
+	if (ft_strcmp(*pstr, "inf") == 0 || ft_strcmp(*pstr, "nan") == 0)
 	{
 		specifier->apply_pound = 0;
 		specifier->apply_zero = 0;
@@ -44,7 +44,7 @@ void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 		apply_flag_zero_float(pstr, specifier, isneg);
 	if (isneg)
 		apply_neg(pstr);
-	else
+	else if (ft_strcmp(*pstr, "nan") != 0)
 	{
 		if (specifier->f_plus)
 			apply_flag_plus(pstr);
