@@ -19,6 +19,7 @@
 		"vector": "c",
 		"types.h": "c",
 		"apply_specifier.h": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"ios": "c"
 	}
 }

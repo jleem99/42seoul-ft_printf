@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 20:17:55 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:29:15 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,20 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854)
 	return (decimal);
 }
 
+static int	check_smaller_decimal_places(t_bigint *decimal, size_t round_idx)
+{
+	size_t	byteidx;
+
+	byteidx = round_idx;
+	while (byteidx > 0)
+	{
+		byteidx--;
+		if (decimal->data[byteidx] != 0)
+			return (1);
+	}
+	return (0);
+}
+
 static int	check_round_condition(t_bigint *integer, t_bigint *decimal, int precision)
 {
 	size_t const	round_idx = decimal->size - (precision + 1);
@@ -132,7 +146,9 @@ static int	check_round_condition(t_bigint *integer, t_bigint *decimal, int preci
 			return (1);
 		else if (decimal->data[round_idx] == 5)
 		{
-			if (precision == 0)
+			if (check_smaller_decimal_places(decimal, round_idx))
+				return (1);
+			else if (precision == 0)
 				return (integer->data[0] % 2 == 1);
 			else
 				return (decimal->data[round_idx + 1] % 2 == 1);
@@ -142,9 +158,8 @@ static int	check_round_condition(t_bigint *integer, t_bigint *decimal, int preci
 }
 
 // Todo: round_idx < 0
-static void	round_number(t_bigint *integer,
-							t_bigint *decimal,
-							int precision)
+
+static void	round_number(t_bigint *integer, t_bigint *decimal, int precision)
 {
 	size_t const	decimal_original_size = decimal->size;
 	size_t const	round_idx = decimal->size - (precision + 1);

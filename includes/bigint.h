@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:27:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 02:02:02 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:04:27 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stddef.h>
 # include <stdint.h>
-# include <sys/types.h>
 
 typedef struct	s_bigint
 {
