@@ -113,6 +113,20 @@ int main(void)
 	test("%.f", -0.4);
 	test("%.f", -0.5);
 	test("%.f", -0.6);
+	// test("%#Lf", 10e100000L);
+	t_ieee854	ieee854;
+	ieee854.d = 0;
+	ieee854.reserved.negative = 0b0;
+	// ieee854.reserved.exponent = 0b0;
+	ieee854.reserved.exponent = 0b111111111111111;
+	ieee854.reserved.section0 = 0b10;
+	ieee854.reserved.section1 = 0b1001;
+	t_bigint *bigint = make_bigint(12, 2);
+	ft_memcpy(bigint->data, &ieee854.d, 12);
+	bigint_shift_bytes(bigint, 2);
+	bigint_shift_bytes(bigint, -2);
+	bigint_inspect(bigint);
+	test("%06Lf", ieee854.d);
 
 	// TEST("%3c", 'a');
 	// TEST("%02%");

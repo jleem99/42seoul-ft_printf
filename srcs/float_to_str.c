@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float_to_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:28:49 by dher             ###   ########.fr       */
+/*   Updated: 2021/05/26 10:31:49 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,34 @@
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 {
-	return (ieee854.ieee.exponent - IEEE854_LONG_DOUBLE_BIAS);
+	return (ieee854.exponent - IEEE854_LONG_DOUBLE_BIAS);
 }
 
 int			ieee854_is_negative(long double flt)
 {
 	t_ieee854 const	ieee854 = { flt };
 
-	return (ieee854.ieee.negative);
+	return (ieee854.negative);
+}
+
+// Todo: exponent == 0 -> zero (for optimization purpose)
+char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
+{
+	if (ieee854.exponent == 32767)
+	{
+		if (ieee854.reserved.section0 == 0b00 ||
+			ieee854.reserved.section0 == 0b01 ||
+			ieee854.reserved.section0 == 0b11)
+			return (ft_strdup("nan"));
+		else if (ieee854.reserved.section0 == 0b10)
+		{
+			if (ieee854.reserved.section1 == 0)
+				return (ft_strdup("inf"));
+			else
+				return (ft_strdup("nan"));
+		}
+	}
+	return (NULL);
 }
 
 /*
@@ -37,9 +57,9 @@ uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 
 	if (start_bit >= end_bit)
 		return (0);
-	mantissa = ieee854.ieee.mantissa0;
+	mantissa = ieee854.mantissa0;
 	mantissa <<= 32;
-	mantissa |= ieee854.ieee.mantissa1;
+	mantissa |= ieee854.mantissa1;
 	if (start_bit > 0)
 		mantissa = (mantissa << start_bit) >> start_bit;
 	if (end_bit < 64)
@@ -171,16 +191,19 @@ static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
 char		*long_double_to_str_10(long double flt, int precision)
 {
 	t_ieee854 const	ieee854 = { flt };
-	t_bigint *const	integer = ieee854_get_integer_part(ieee854);
-	t_bigint *const	decimal = ieee854_get_decimal_part(ieee854);
+	t_bigint		*integer;
+	t_bigint		*decimal;
 	char			*str;
 
-	// bigint_inspect_decimal(integer);
-	// bigint_inspect_decimal(decimal);
-
-	round_number(integer, decimal, precision);
-	str = join_integer_decimal(integer, decimal);
-	free_bigint(integer);
-	free_bigint(decimal);
+	str = ieee854_check_reserved_bits(ieee854);
+	if (!str)
+	{
+		integer = ieee854_get_integer_part(ieee854);
+		decimal = ieee854_get_decimal_part(ieee854);
+		round_number(integer, decimal, precision);
+		str = join_integer_decimal(integer, decimal);
+		free_bigint(integer);
+		free_bigint(decimal);
+	}
 	return (str);
 }

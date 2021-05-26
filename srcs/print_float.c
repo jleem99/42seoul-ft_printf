@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_float.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dher <dher@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:29:51 by dher             ###   ########.fr       */
+/*   Updated: 2021/05/26 05:40:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	print_f(t_printer *printer, t_specifier *specifier)
 		str = long_double_to_str_10(flt, 6);
 	else
 		str = long_double_to_str_10(flt, specifier->precision);
-	
 	apply_flag_float(&str, specifier, ieee854_is_negative(flt));
 	print(str, printer, specifier);
 	free(str);

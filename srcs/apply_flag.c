@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:06:15 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 10:44:29 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 
 void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 {
+	if (ft_strncmp(*pstr, "inf", 3) == 0 || ft_strncmp(*pstr, "nan", 3) == 0)
+	{
+		specifier->apply_pound = 0;
+		specifier->apply_zero = 0;
+	}
 	if (specifier->apply_pound)
 		add_trailing_dot(pstr);
 	if (specifier->apply_zero)
