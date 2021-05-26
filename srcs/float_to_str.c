@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 10:31:49 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 20:17:55 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 {
-	return (ieee854.exponent - IEEE854_LONG_DOUBLE_BIAS);
+	return (ieee854.bitfield.exponent - IEEE854_LONG_DOUBLE_BIAS);
 }
 
 int			ieee854_is_negative(long double flt)
 {
 	t_ieee854 const	ieee854 = { flt };
 
-	return (ieee854.negative);
+	return (ieee854.bitfield.negative);
 }
 
 // Todo: exponent == 0 -> zero (for optimization purpose)
 char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
 {
-	if (ieee854.exponent == 32767)
+	if (ieee854.bitfield.exponent == 32767)
 	{
 		if (ieee854.reserved.section0 == 0b00 ||
 			ieee854.reserved.section0 == 0b01 ||
@@ -57,9 +57,9 @@ uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 
 	if (start_bit >= end_bit)
 		return (0);
-	mantissa = ieee854.mantissa0;
+	mantissa = ieee854.bitfield.mantissa0;
 	mantissa <<= 32;
-	mantissa |= ieee854.mantissa1;
+	mantissa |= ieee854.bitfield.mantissa1;
 	if (start_bit > 0)
 		mantissa = (mantissa << start_bit) >> start_bit;
 	if (end_bit < 64)
@@ -142,10 +142,13 @@ static int	check_round_condition(t_bigint *integer, t_bigint *decimal, int preci
 }
 
 // Todo: round_idx < 0
-static void	round_number(t_bigint *integer, t_bigint *decimal, int precision)
+static void	round_number(t_bigint *integer,
+							t_bigint *decimal,
+							int precision)
 {
 	size_t const	decimal_original_size = decimal->size;
 	size_t const	round_idx = decimal->size - (precision + 1);
+	int				round;
 
 	if (check_round_condition(integer, decimal, precision))
 	{

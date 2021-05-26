@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 03:24:23 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 09:48:59 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 20:10:51 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # endif
 
 # include <stdint.h>
-# include <ieee754.h>
+
 typedef union		u_ieee754_double
 {
 	double			d;
@@ -33,7 +33,7 @@ typedef union		u_ieee754_double
 		uint32_t	mantissa0	: 20;
 		uint32_t	exponent	: 11;
 		uint32_t	negative	: 1;
-	}				ieee;
+	}				bitfield;
 
 	struct
 	{
@@ -58,7 +58,7 @@ typedef union		u_ieee854_long_double
 		uint32_t	exponent	: 15;
 		uint32_t	negative	: 1;
 		uint32_t	empty		: 16;
-	};
+	}				bitfield;
 
 	struct
 	{
