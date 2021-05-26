@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:37:51 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:46:20 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 	}
 }
 
+void		apply_capitalization_float(char **pstr, t_specifier *specifier)
+{
+	char *const	str = *pstr;
+	size_t		i;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_toupper(str[i]);
+		i++;
+	}
+}
+
 void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 {
 	if (ft_strcmp(*pstr, "inf") == 0 || ft_strcmp(*pstr, "nan") == 0)
@@ -51,4 +64,6 @@ void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 		else if (specifier->f_space)
 			apply_flag_space(pstr);
 	}
+	if (is_float_capital(specifier))
+		apply_capitalization_float(pstr, specifier);
 }

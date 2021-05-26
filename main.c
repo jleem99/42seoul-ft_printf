@@ -119,7 +119,7 @@ int main(void)
 	double special;
 	*((unsigned long *)&special) = 0x7FF0000000100000;
 	// test("%+6f", 0.0/0.0);
-	test("% f", 0.0/0.0);
+	test("% F", 0.0/0.0);
 	// test("% .7f", 0.0/0.0);
 
 	// TEST("%3c", 'a');

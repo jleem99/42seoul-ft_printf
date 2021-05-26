@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 22:03:26 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:06:36 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:41:57 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ int		is_integer(t_specifier *specifier)
 int		is_float(t_specifier *specifier)
 {
 	return (ft_strchr("fFeEgGaA", specifier->specifier) != NULL);
+}
+
+int		is_float_capital(t_specifier *specifier)
+{
+	return (ft_strchr("FEGA", specifier->specifier) != NULL);
 }

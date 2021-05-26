@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:15:56 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:27:40 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:42:56 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void			resolve_specifier(t_specifier *specifier);
 int				is_specifier(t_specifier *specifier);
 int				is_integer(t_specifier *specifier);
 int				is_float(t_specifier *specifier);
+int				is_float_capital(t_specifier *specifier);
 
 #endif
