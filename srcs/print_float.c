@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 05:40:40 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 23:24:14 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "specifier.h"
 #include "apply_specifier.h"
 #include "getarg.h"
-#include "float_to_str.h"
+#include "convert.h"
 #include <stdlib.h>
 
 static void	print_f(t_printer *printer, t_specifier *specifier)

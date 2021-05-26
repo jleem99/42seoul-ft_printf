@@ -45,8 +45,8 @@ void	inspect_bit(t_itype val)
 	printf("\n");
 }
 
-#include "bigint.h"
-#include "float_to_str.h"
+#include "libft_bonus.h"
+#include "convert.h"
 #include "specifier.h"
 int main(void)
 {

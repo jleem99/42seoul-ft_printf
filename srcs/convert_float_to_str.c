@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_to_str.c                                     :+:      :+:    :+:   */
+/*   convert_float_to_str.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:29:15 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 23:28:30 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "float_to_str.h"
-#include "bigint.h"
+#include "convert.h"
 #include "libft_bonus.h"
 #include <stdlib.h>
 
@@ -163,7 +162,6 @@ static void	round_number(t_bigint *integer, t_bigint *decimal, int precision)
 {
 	size_t const	decimal_original_size = decimal->size;
 	size_t const	round_idx = decimal->size - (precision + 1);
-	int				round;
 
 	if (check_round_condition(integer, decimal, precision))
 	{

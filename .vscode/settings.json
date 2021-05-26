@@ -21,6 +21,8 @@
 		"apply_specifier.h": "c",
 		"cmath": "c",
 		"ios": "c",
-		"libft_bonus.h": "c"
+		"libft_bonus.h": "c",
+		"convert.h": "c",
+		"printer.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 22:03:14 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 23:24:04 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "apply_specifier.h"
 #include "libft.h"
 #include "getarg.h"
-#include "int_to_str.h"
+#include "convert.h"
 
 static void	print_d(t_printer *printer, t_specifier *specifier)
 {

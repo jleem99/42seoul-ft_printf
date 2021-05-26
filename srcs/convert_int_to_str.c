@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_integer_utils.c                              :+:      :+:    :+:   */
+/*   convert_int_to_str.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 07:43:49 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/21 22:00:20 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/26 23:25:24 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "int_to_str.h"
+#include "convert.h"
 #include "libft.h"
 
 char		*uintmax_to_str_10(uintmax_t n)

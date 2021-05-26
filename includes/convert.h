@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_to_str.h                                     :+:      :+:    :+:   */
+/*   convert.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 03:24:23 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 20:10:51 by jleem            ###   ########.fr       */
+/*   Created: 2021/05/21 21:59:07 by jleem             #+#    #+#             */
+/*   Updated: 2021/05/26 23:23:20 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FLOAT_TO_STR_H
-# define FLOAT_TO_STR_H
+#ifndef CONVERT_H
+# define CONVERT_H
 
 # ifdef __linux__
 #  include <bits/endian.h>
@@ -23,6 +23,17 @@
 
 # include <stdint.h>
 
+/*
+** Convert integer to string
+*/
+char				*intmax_to_str_10(intmax_t n);
+char				*uintmax_to_str_10(uintmax_t n);
+char				*uintmax_to_str_8(uintmax_t n);
+char				*uintmax_to_str_16(uintmax_t n, char base);
+
+/*
+** Convert floating point to string
+*/
 typedef union		u_ieee754_double
 {
 	double			d;
