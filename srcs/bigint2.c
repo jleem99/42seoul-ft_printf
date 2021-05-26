@@ -5,47 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 21:56:17 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:05:25 by jleem            ###   ########.fr       */
+/*   Created: 2021/05/26 22:32:06 by jleem             #+#    #+#             */
+/*   Updated: 2021/05/26 22:32:08 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bigint.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	bigint_add_digit(t_bigint *bigint, uint8_t addend, size_t byteidx)
+t_bigint	*bigint_copy(t_bigint *bigint)
 {
-	uint16_t	sum;
+	t_bigint *const	new_bigint = make_bigint(bigint->size, bigint->base);
 
-	sum = bigint->data[byteidx] + addend;
-	bigint_set_digit(bigint, sum, byteidx);
+	ft_memcpy(new_bigint->data, bigint->data, bigint->size);
+	return (new_bigint);
 }
 
-void	bigint_add(t_bigint *bigint, t_bigint *addend)
+uint8_t		*bigint_copy_data(t_bigint *bigint)
 {
-	size_t		byteidx;
-	uint16_t	sum;
-
-	if (bigint->size < addend->size)
-		bigint_resize(bigint, addend->size);
-	byteidx = 0;
-	while (byteidx < addend->size)
-	{
-		sum = bigint->data[byteidx] + addend->data[byteidx];
-		bigint_set_digit(bigint, sum, byteidx);
-		byteidx++;
-	}
+	uint8_t *const	new_data = malloc(bigint->size);
+	
+	ft_memcpy(new_data, bigint->data, bigint->size);
+	return (new_data);
 }
 
-void	bigint_multiply(t_bigint *bigint, uint8_t multiplier)
+void		bigint_resize(t_bigint *bigint, size_t new_size)
 {
-	size_t		byteidx;
-	uint16_t	product;
+	uint8_t *const	new_data = ft_calloc(new_size, sizeof(uint8_t));
 
-	byteidx = bigint->size;
-	while (byteidx > 0)
-	{
-		byteidx--;
-		product = bigint->data[byteidx] * multiplier;
-		bigint_set_digit(bigint, product, byteidx);
-	}
+	if (new_size > bigint->size)
+		ft_memcpy(new_data, bigint->data, bigint->size);
+	else
+		ft_memcpy(new_data, bigint->data, new_size);
+	free(bigint->data);
+	bigint->data = new_data;
+	bigint->size = new_size;
+}
+
+void		bigint_resize_reverse(t_bigint *bigint, size_t new_size)
+{
+	uint8_t *const	new_data = ft_calloc(new_size, sizeof(uint8_t));
+	int const		delta_size = new_size - bigint->size;
+
+	if (new_size > bigint->size)
+		ft_memcpy(new_data + delta_size, bigint->data, bigint->size);
+	else
+		ft_memcpy(new_data, bigint->data - delta_size, new_size);
+	free(bigint->data);
+	bigint->data = new_data;
+	bigint->size = new_size;
 }
