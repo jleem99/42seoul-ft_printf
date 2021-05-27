@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:30:18 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/27 15:49:23 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ t_specifier		*parse_specifier(t_printer *printer)
 {
 	t_specifier		*specifier;
 
-	printer->spec_idx = printer->fmt_idx;
 	specifier = ft_calloc(1, sizeof(t_specifier));
 	if (!specifier)
 		return (NULL);

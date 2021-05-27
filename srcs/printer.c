@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/04/27 21:45:29 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/27 15:46:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_printer	init_printer(char const *format, va_list *ap)
 	printer.fmt = format;
 	printer.fmt_idx = 0;
 	printer.fmt_len = ft_strlen(printer.fmt);
-	printer.cursor = 0;
 	printer.nchar = 0;
 	printer.ap = ap;
 	return (printer);
@@ -44,10 +43,6 @@ void		printer_putc(t_printer *printer, char c)
 {
 	ft_putchar_fd(c, 1);
 	printer->nchar++;
-	if (c == '\n')
-		printer->cursor = 0;
-	else
-		printer->cursor++;
 }
 
 int			printer_chkc(t_printer *printer, char c)

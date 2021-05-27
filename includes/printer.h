@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:19:35 by jleem             #+#    #+#             */
-/*   Updated: 2021/04/27 21:45:37 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/27 15:49:24 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ typedef struct	s_printer
 	char const	*fmt;
 	int			fmt_idx;
 	int			fmt_len;
-	int			spec_idx;
-	int			cursor;
 	int			nchar;
 	va_list		*ap;
 }				t_printer;
