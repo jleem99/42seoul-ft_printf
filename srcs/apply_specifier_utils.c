@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:43:58 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:19:03 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/27 20:11:12 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,15 @@ void	apply_flag_zero_integer(char **pstr, t_specifier *specifier, int isneg)
 	padlen = specifier->width - slen;
 	if (isneg)
 		padlen -= 1;
-	else
+	else if (specifier->apply_pound)
 	{
-		if (specifier->apply_pound)
-		{
-			if (specifier->specifier == 'o')
-				padlen -= 1;
-			else
-				padlen -= 2;
-		}
-		else if (specifier->f_plus || specifier->f_space)
+		if (specifier->specifier == 'o')
 			padlen -= 1;
+		else
+			padlen -= 2;
 	}
+	else if (specifier->f_plus || specifier->f_space)
+		padlen -= 1;
 	if (padlen <= 0)
 		return ;
 	str_new = malloc(padlen + slen + 1); // malloc check ctrl f malloc
@@ -88,11 +85,8 @@ void	apply_flag_zero_float(char **pstr, t_specifier *specifier, int isneg)
 	padlen = specifier->width - slen;
 	if (isneg)
 		padlen -= 1;
-	else
-	{
-		if (specifier->f_plus || specifier->f_space)
-			padlen -= 1;
-	}
+	else if (specifier->f_plus || specifier->f_space)
+		padlen -= 1;
 	if (padlen <= 0)
 		return ;
 	str_new = malloc(padlen + slen + 1); // malloc check ctrl f malloc
