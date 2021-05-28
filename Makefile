@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/05/26 01:49:58 by jleem            ###   ########.fr        #
+#    Updated: 2021/05/29 08:15:04 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,21 @@ fclean		: clean
 
 re			: fclean all
 
-
 debug		: all # To be removed
 	$(CC) main.c $(NAME) $(CFLAGS) -o test.out
 
+test		: CFLAGS += -Wno-format
 test		: debug # To be removed
 	./test.out
+
+profile		: CFLAGS += -w
+profile		: CFLAGS += '-D TESTMODE=1'
+profile		: debug
+	bash -c "time ./test.out > /dev/null"
+
+reference	: CFLAGS += -w
+reference	: CFLAGS += '-D TESTMODE=0'
+reference	: debug
+	bash -c "time ./test.out > /dev/null"
 
 .PHONY		: all clean fclean re

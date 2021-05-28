@@ -1,27 +1,38 @@
 #include "ft_printf.h"
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include <limits.h>
 #include <stdint.h>
+#include <math.h>
+#include "libft_bonus.h"
+#include "convert.h"
+#include "specifier.h"
+
+#ifndef TESTMODE
+# define TESTMODE 0
+#endif
+#define TEST_SPECIFIER "f"
+
+#if TESTMODE == 0
+# define TEST(...) printf(__VA_ARGS__)
+#elif TESTMODE == 1
+# define TEST(...) ft_printf(__VA_ARGS__)
+#elif TESTMODE == 2
+# define GET_FIRST_ARG(ARG, ...) ARG
+# define TEST(...) \
+	printf("\n[%s]\nyou: |",  GET_FIRST_ARG(__VA_ARGS__)); \
+	__ret1 = ft_printf(__VA_ARGS__); \
+	printf("| -> %d\nans: |", __ret1); \
+	__ret2 = printf(__VA_ARGS__); \
+	printf("| -> %d\n", __ret2)
+#endif
 
 #define INIT_TEST() \
 	int __ret1; \
 	int __ret2; \
 	setvbuf(stdout, NULL, _IONBF, 0);
-
-#define TEST(...) \
-	printf("\nyou: |"); \
-	__ret1 = ft_printf(__VA_ARGS__); \
-	printf("| -> %d\nans: |", __ret1); \
-	__ret2 = printf(__VA_ARGS__); \
-	printf("| -> %d\n", __ret2);
-
 #define test(...) TEST(__VA_ARGS__)
 
-#include <math.h>
-#include <libft.h>
 
 typedef __uint128_t	t_mtype;
 typedef float		t_itype;
@@ -45,20 +56,28 @@ void	inspect_bit(t_itype val)
 	printf("\n");
 }
 
-#include "libft_bonus.h"
-#include "convert.h"
-#include "specifier.h"
-#define TEST_SPECIFIER "f"
+int run_test(void);
 
 int main(void)
+{
+#if TESTMODE != 2
+	for (int i = 0; i < 1000; i++)
+		run_test();
+#else
+	run_test();
+#endif
+	return (0);
+}
+
+int run_test(void)
 {
 	INIT_TEST();
 
 	long double num = -11234.5891727419283478912371465745674567456234123L;
 	float numf = -11234.5891727419283478912371465745674567456234123f;
 
-	TEST("%.70L"TEST_SPECIFIER, num);
 	TEST("%L"TEST_SPECIFIER, num);
+	TEST("%.70L"TEST_SPECIFIER, num);
 	TEST("%8.L"TEST_SPECIFIER, num);
 	TEST("%#8.L"TEST_SPECIFIER, num);
 	TEST("%+#8.L"TEST_SPECIFIER, num);
@@ -105,7 +124,6 @@ int main(void)
 	test("% +.3"TEST_SPECIFIER, -7.3);
 	test("% 05.0"TEST_SPECIFIER, -7.3);
 	test("%.1"TEST_SPECIFIER, -3.85);
-	sizeof(long double);
 	test("%."TEST_SPECIFIER, 0.4);
 	test("%."TEST_SPECIFIER, 0.5);
 	test("%."TEST_SPECIFIER, 0.6);
@@ -121,7 +139,7 @@ int main(void)
 	// TEST("%02%");
 	// TEST("%p", 0x123a);
 	// TEST("%.p", NULL);
-	// TEST("%.d", 0);
+	TEST("%.d", 0);
 	// TEST("%20.30p", 0x1234f);
 	// TEST("% +20.30q %d%d", 0x1234f, 1234, 4321);
 	// TEST("%"TEST_SPECIFIER, 1234000000000000000000000000000000000000000000000000000000000000000000000000000.f);
