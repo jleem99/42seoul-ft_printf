@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/05/29 08:15:04 by jleem            ###   ########.fr        #
+#    Updated: 2021/05/30 03:23:38 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,12 +54,12 @@ test		: debug # To be removed
 	./test.out
 
 profile		: CFLAGS += -w
-profile		: CFLAGS += '-D TESTMODE=1'
+profile		: CFLAGS += -D TESTMODE=1
 profile		: debug
 	bash -c "time ./test.out > /dev/null"
 
 reference	: CFLAGS += -w
-reference	: CFLAGS += '-D TESTMODE=0'
+reference	: CFLAGS += -D TESTMODE=0
 reference	: debug
 	bash -c "time ./test.out > /dev/null"
 

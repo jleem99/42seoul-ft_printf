@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:28:30 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/30 03:24:04 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
 /*
 ** Get mantissa bits: [start_bit, end_bit)
 */
-
+// Ensure very first bit of mantissa to be zero
 uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 {
 	uint64_t	mantissa;

@@ -9,7 +9,7 @@
 #include "specifier.h"
 
 #ifndef TESTMODE
-# define TESTMODE 0
+# define TESTMODE 2
 #endif
 #define TEST_SPECIFIER "f"
 
@@ -33,29 +33,6 @@
 	setvbuf(stdout, NULL, _IONBF, 0);
 #define test(...) TEST(__VA_ARGS__)
 
-
-typedef __uint128_t	t_mtype;
-typedef float		t_itype;
-void	inspect_bit(t_itype val)
-{
-	t_mtype	bitmask = (t_mtype)0b1 << (sizeof(t_mtype) * 8 - 1);
-	t_mtype	b;
-
-	ft_bzero(&b, sizeof(t_mtype));
-	ft_memcpy(&b, &val, sizeof(t_itype));
-	char counter = 0;
-	for (; bitmask != 0; bitmask >>= 1)
-	{
-		printf("%d", (b & bitmask) != 0);
-		counter++;
-		if (counter % 32 == 0)
-			printf("\n");
-		else if (counter % 8 == 0)
-			printf(" ");
-	}
-	printf("\n");
-}
-
 int run_test(void);
 
 int main(void)
@@ -73,8 +50,8 @@ int run_test(void)
 {
 	INIT_TEST();
 
-	long double num = -11234.5891727419283478912371465745674567456234123L;
-	float numf = -11234.5891727419283478912371465745674567456234123f;
+	long double num = -1234.5891727419283478912371465745674567456234123L;
+	float numf = -1234.5891727419283478912371465745674567456234123f;
 
 	TEST("%L"TEST_SPECIFIER, num);
 	TEST("%.70L"TEST_SPECIFIER, num);

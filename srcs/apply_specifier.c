@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:29:21 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/30 03:23:58 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 		else if (specifier->f_space)
 			apply_flag_space(pstr);
 	}
+	// if (is_integer_capital(specifier))
+	// 	apply_capitalization(pstr);
 }
 
 void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
