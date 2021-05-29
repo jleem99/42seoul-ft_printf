@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 21:59:07 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:23:20 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/30 04:10:42 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ typedef union		u_ieee854_long_double
 # define IEEE854_LONG_DOUBLE_BIAS 0x3fff
 
 char				*long_double_to_str_10(long double flt, int precision);
+
+int					ieee854_get_unbiased_exponent(t_ieee854 ieee854);
 int					ieee854_is_negative(long double flt);
+uint64_t			ieee854_get_mantissa(t_ieee854 ieee854,
+											int start_bit,
+											int end_bit);
 
 #endif
