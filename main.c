@@ -33,27 +33,35 @@
 	setvbuf(stdout, NULL, _IONBF, 0);
 #define test(...) TEST(__VA_ARGS__)
 
-int run_test(void);
+void	run_test(void);
 
-int main(void)
+void	temp_test(void)
+{
+	INIT_TEST();
+	TEST("%L"TEST_SPECIFIER, 0.5L);
+	TEST("%L"TEST_SPECIFIER, 1.L);
+	TEST("%L"TEST_SPECIFIER, 1.5L);
+}
+
+int		main(void)
 {
 #if TESTMODE != 2
 	for (int i = 0; i < 1000; i++)
 		run_test();
 #else
 	run_test();
+	// temp_test();
 #endif
 	return (0);
 }
 
-int run_test(void)
+void	run_test(void)
 {
 	INIT_TEST();
 
 	long double num = -4321.5891727419283478912371465745674567456234123L;
 	float numf = -4321.5891727419283478912371465745674567456234123f;
 
-	TEST("%1.s", "hello");
 	TEST("%L"TEST_SPECIFIER, num);
 	TEST("%.70L"TEST_SPECIFIER, num);
 	TEST("%8.L"TEST_SPECIFIER, num);
@@ -125,7 +133,4 @@ int run_test(void)
 	// TEST("%"TEST_SPECIFIER, __FLT_MAX__ + 1.0f);
 	// TEST("%"TEST_SPECIFIER, __FLT_MAX__ + 2.0f);
 	// test("%.*"TEST_SPECIFIER, -3, 3.1415926535);
-
-	// printf("%d vs %d vs %d\n", sizeof(float), sizeof(double), sizeof(long double));
-	return (0);
 }
