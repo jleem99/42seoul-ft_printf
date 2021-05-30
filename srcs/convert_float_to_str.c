@@ -6,33 +6,13 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/30 04:12:17 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 00:06:37 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.h"
 #include "libft_bonus.h"
 #include <stdlib.h>
-
-// Todo: exponent == 0 -> zero (for optimization purpose)
-char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
-{
-	if (ieee854.bitfield.exponent == 32767)
-	{
-		if (ieee854.reserved.section0 == 0b00 ||
-			ieee854.reserved.section0 == 0b01 ||
-			ieee854.reserved.section0 == 0b11)
-			return (ft_strdup("nan"));
-		else if (ieee854.reserved.section0 == 0b10)
-		{
-			if (ieee854.reserved.section1 == 0)
-				return (ft_strdup("inf"));
-			else
-				return (ft_strdup("nan"));
-		}
-	}
-	return (NULL);
-}
 
 static void	convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa)
 {

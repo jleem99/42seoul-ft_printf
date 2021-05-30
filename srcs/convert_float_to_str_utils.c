@@ -6,11 +6,12 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 04:00:51 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/30 04:13:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/30 09:44:53 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.h"
+#include "libft.h"
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 {
@@ -42,4 +43,24 @@ uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 	if (end_bit < 64)
 		mantissa >>= (64 - end_bit);
 	return (mantissa);
+}
+
+// Todo: exponent == 0 -> zero (for optimization purpose)
+char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
+{
+	if (ieee854.bitfield.exponent == 32767)
+	{
+		if (ieee854.reserved.section0 == 0b00 ||
+			ieee854.reserved.section0 == 0b01 ||
+			ieee854.reserved.section0 == 0b11)
+			return (ft_strdup("nan"));
+		else if (ieee854.reserved.section0 == 0b10)
+		{
+			if (ieee854.reserved.section1 == 0)
+				return (ft_strdup("inf"));
+			else
+				return (ft_strdup("nan"));
+		}
+	}
+	return (NULL);
 }
