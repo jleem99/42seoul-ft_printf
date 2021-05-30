@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 00:06:37 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 03:16:10 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,58 +74,45 @@ static int	check_smaller_decimal_places(t_bigint *decimal, size_t round_idx)
 	size_t	byteidx;
 
 	byteidx = round_idx;
-	while (byteidx > 0)
-	{
-		byteidx--;
+	while (byteidx-- > 0)
 		if (decimal->data[byteidx] != 0)
 			return (1);
-	}
 	return (0);
 }
 
-static int	check_round_condition(t_bigint *integer, t_bigint *decimal, int precision)
+static int	check_round_condition(t_bigint *number, int precision)
 {
-	size_t const	round_idx = decimal->size - (precision + 1);
+	size_t const	round_idx = number->size - (precision + 1);
 
-	if (decimal->size > (size_t)(precision + 1))
+	if (number->size > (size_t)(precision + 1))
 	{
-		if (decimal->data[round_idx] > 5)
+		if (number->data[round_idx] > 5)
 			return (1);
-		else if (decimal->data[round_idx] == 5)
+		else if (number->data[round_idx] == 5)
 		{
-			if (check_smaller_decimal_places(decimal, round_idx))
+			if (check_smaller_decimal_places(number, round_idx))
 				return (1);
-			else if (precision == 0)
-				return (integer->data[0] % 2 == 1);
 			else
-				return (decimal->data[round_idx + 1] % 2 == 1);
+				return (number->data[round_idx + 1] % 2 == 1);
 		}
 	}
 	return (0);
 }
 
-// Todo: round_idx < 0
-
-static void	round_number(t_bigint *integer, t_bigint *decimal, int precision)
+static int	round_number(t_bigint *number, int precision)
 {
-	size_t const	decimal_original_size = decimal->size;
-	size_t const	round_idx = decimal->size - (precision + 1);
+	size_t const	round_idx = number->size - (precision + 1);
+	size_t const	original_size = number->size;
+	int				overflow;
 
-	if (check_round_condition(integer, decimal, precision))
-	{
-		if (precision == 0)
-			bigint_add_digit(integer, 1, 0);
-		else
-		{
-			bigint_add_digit(decimal, 1, round_idx + 1);
-			if (decimal->size != decimal_original_size)
-			{
-				bigint_add_digit(integer, 1, 0);
-				bigint_resize(decimal, decimal->size - 1);
-			}
-		}
-	}
-	bigint_resize_reverse(decimal, precision);
+	if (check_round_condition(number, precision))
+		bigint_add_digit(number, 1, round_idx + 1);
+	overflow = (number->size != original_size);
+	if (overflow)
+		bigint_resize_reverse(number, precision + 1);
+	else
+		bigint_resize_reverse(number, precision);
+	return (overflow);
 }
 
 static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
@@ -152,11 +139,29 @@ static char	*join_integer_decimal(t_bigint *integer, t_bigint *decimal)
 	return (str);
 }
 
+static void	add_decimal_point(char **pstr, size_t integer_len)
+{
+	char			*new_str;
+	size_t const	slen = ft_strlen(*pstr);
+	char *const		integer_str = *pstr;
+	char *const		decimal_str = integer_str + integer_len;
+
+	if (integer_len == slen)
+		return ;
+	new_str = malloc(ft_strlen(*pstr) + 2);
+	ft_memcpy(new_str, integer_str, integer_len);
+	new_str[integer_len] = '.';
+	ft_strcpy(new_str + integer_len + 1, decimal_str);
+	free(*pstr);
+	*pstr = new_str;
+}
+
 char		*long_double_to_str_10(long double flt, int precision)
 {
 	t_ieee854 const	ieee854 = { flt };
 	t_bigint		*integer;
 	t_bigint		*decimal;
+	t_bigint		*number;
 	char			*str;
 
 	str = ieee854_check_reserved_bits(ieee854);
@@ -164,10 +169,20 @@ char		*long_double_to_str_10(long double flt, int precision)
 	{
 		integer = ieee854_get_integer_part(ieee854);
 		decimal = ieee854_get_decimal_part(ieee854);
-		round_number(integer, decimal, precision);
-		str = join_integer_decimal(integer, decimal);
+		number = bigint_append(integer, decimal);
+		if (round_number(number, integer->size + precision))
+		{
+			str = bigint_to_string(number);
+			add_decimal_point(&str, integer->size + 1);
+		}
+		else
+		{
+			str = bigint_to_string(number);
+			add_decimal_point(&str, integer->size);
+		}
 		free_bigint(integer);
 		free_bigint(decimal);
+		free_bigint(number);
 	}
 	return (str);
 }
