@@ -11,7 +11,7 @@
 #ifndef TESTMODE
 # define TESTMODE 2
 #endif
-#define TEST_SPECIFIER "f"
+#define TEST_SPECIFIER "e"
 
 #if TESTMODE == 0
 # define TEST(...) printf(__VA_ARGS__)
@@ -39,10 +39,19 @@ void	test_42tester(void);
 void	temp_test(void)
 {
 	INIT_TEST();
-	TEST("%L"TEST_SPECIFIER, 0.5L);
+	TEST("%f", 8.5f);
+	TEST("%L"TEST_SPECIFIER, 1.9999996L);
+	TEST("%L"TEST_SPECIFIER, 1.05L);
+	TEST("%L"TEST_SPECIFIER, 1.5L);
+	TEST("%L"TEST_SPECIFIER, 3.L);
+	TEST("%L"TEST_SPECIFIER, 0.75L);
+	// TEST("%L"TEST_SPECIFIER, 0.05L);
+	// TEST("%L"TEST_SPECIFIER, 0.5L);
 	TEST("%L"TEST_SPECIFIER, 1.L);
 	TEST("%L"TEST_SPECIFIER, 1.5L);
+	// TEST("%L"TEST_SPECIFIER, 234.3L);
 }
+void	bigint_divide_2_base10(t_bigint *bigint);
 
 int		main(void)
 {
@@ -50,9 +59,22 @@ int		main(void)
 	for (int i = 0; i < 1000; i++)
 		run_test();
 #else
-	// run_test();
+	run_test();
 	// temp_test();
-	test_42tester();
+	// test_42tester();
+
+	// t_bigint *bigint = make_bigint(7, 10);
+	// bigint_set_digit(bigint, 5, 0);
+	// bigint_set_digit(bigint, 0, 1);
+	// bigint_set_digit(bigint, 0, 2);
+	// bigint_set_digit(bigint, 0, 3);
+	// bigint_set_digit(bigint, 0, 4);
+	// bigint_set_digit(bigint, 5, 5);
+	// bigint_set_digit(bigint, 1, 6);
+	// bigint_inspect_decimal(bigint);
+	// bigint_divide_2_base10(bigint);
+	// bigint_inspect_decimal(bigint);
+	// free_bigint(bigint);
 #endif
 	return (0);
 }
@@ -122,6 +144,7 @@ void	run_test(void)
 	test("%."TEST_SPECIFIER, -0.6);
 	test("%+6"TEST_SPECIFIER, 0.0/0.0);
 	test("% "TEST_SPECIFIER, 0.0/0.0);
+	test("% "TEST_SPECIFIER, 1e+3);
 	// test("% .7"TEST_SPECIFIER, 0.0/0.0);
 	// TEST("%3c", 'a');
 	// TEST("%02%");
@@ -135,6 +158,9 @@ void	run_test(void)
 	// TEST("%"TEST_SPECIFIER, __FLT_MAX__ + 1.0f);
 	// TEST("%"TEST_SPECIFIER, __FLT_MAX__ + 2.0f);
 	// test("%.*"TEST_SPECIFIER, -3, 3.1415926535);
+	TEST("%.4L"TEST_SPECIFIER, 9.9999L);
+	TEST("%.3L"TEST_SPECIFIER, 9.9999L);
+	TEST("%.L"TEST_SPECIFIER, 0.9L);
 }
 
 void	test_42tester(void)

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/30 03:23:58 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 04:34:18 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 		specifier->apply_pound = 0;
 		specifier->apply_zero = 0;
 	}
+	if (ft_strchr("eE", specifier->specifier)) // handle for g situation)
+		specifier->apply_pound = 0;
 	if (specifier->apply_pound)
 		apply_flag_pound(pstr, specifier);
 	if (specifier->apply_zero)

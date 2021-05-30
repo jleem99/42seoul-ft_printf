@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 04:00:51 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 03:22:10 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 03:39:15 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int			ieee854_get_unbiased_exponent(t_ieee854 ieee854)
 	return (ieee854.bitfield.exponent - IEEE854_LONG_DOUBLE_BIAS);
 }
 
-int			ieee854_is_negative(long double flt)
+int			ieee854_is_negative(t_ieee854 ieee854)
 {
-	t_ieee854 const	ieee854 = { flt };
-
 	return (ieee854.bitfield.negative);
 }
 
