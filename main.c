@@ -40,6 +40,7 @@ void	temp_test(void)
 {
 	INIT_TEST();
 	TEST("%f", 8.5f);
+	test("%Le", 0.0L);
 	TEST("%L"TEST_SPECIFIER, 1.9999996L);
 	TEST("%L"TEST_SPECIFIER, 1.05L);
 	TEST("%L"TEST_SPECIFIER, 1.5L);
@@ -59,8 +60,8 @@ int		main(void)
 	for (int i = 0; i < 1000; i++)
 		run_test();
 #else
-	run_test();
-	// temp_test();
+	// run_test();
+	temp_test();
 	// test_42tester();
 
 	// t_bigint *bigint = make_bigint(7, 10);

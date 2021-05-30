@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 04:39:48 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 05:36:56 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854)
 {
 	t_bigint *const	integer = make_bigint(1, 10);
 	int const		num_bits = ieee854_get_unbiased_exponent(ieee854) + 1;
+	uint64_t const	mantissa = ieee854_get_mantissa(ieee854, 0, num_bits);
 	int				leftover_bits;
 
-	convert_mantissa_to_bigint(integer,
-		ieee854_get_mantissa(ieee854, 0, num_bits));
+	if (mantissa == 0)
+		return (integer);
+	convert_mantissa_to_bigint(integer, mantissa);
 	leftover_bits = num_bits - 64;
 	while (leftover_bits-- > 0)
 		bigint_multiply(integer, 2);
@@ -33,12 +35,12 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854)
 	t_bigint *const	decimal = make_bigint(0, 10);
 	int const		unused_bits = ieee854_get_unbiased_exponent(ieee854) + 1;
 	int const		num_bits = 64 - unused_bits;
+	uint64_t const	mantissa = ieee854_get_mantissa(ieee854, unused_bits, 64);
 	int				decimalifier;
 
-	if (unused_bits >= 64)
+	if (mantissa == 0)
 		return (decimal);
-	convert_mantissa_to_bigint(decimal,
-		ieee854_get_mantissa(ieee854, unused_bits, 64));
+	convert_mantissa_to_bigint(decimal, mantissa);
 	decimalifier = 0;
 	while (decimalifier++ < num_bits)
 		bigint_multiply(decimal, 5);
@@ -91,13 +93,14 @@ static int	handle_exponent(t_bigint *number, size_t integer_size)
 {
 	int		exponent;
 
+	if (number->size == 1 && number->data[0] == 0)
+		return (0);
 	exponent = 0;
-	while (number->data[number->size - 1] == 0)
-	{
-		bigint_resize(number, number->size - 1);
+	while (number->data[number->size - 1 + exponent] == 0)
 		exponent--;
-	}
-	if (exponent == 0)
+	if (exponent != 0)
+		bigint_resize(number, number->size + exponent);
+	else
 		exponent = integer_size - 1;
 	return (exponent);
 }
@@ -146,13 +149,13 @@ char		*long_double_to_str_10_e(t_ieee854 ieee854, int precision, int apply_pound
 		exponent = handle_exponent(number, integer->size);
 		if (round_number(number, 1 + precision))
 		{
-			integer->size++;
+			exponent++;
 			round_number(number, 1 + precision);
 		}
 		str = bigint_to_string(number);
 		if (ft_strlen(str) != 1 || apply_pound)
 			add_decimal_point_force(&str, 1);
-		add_exponent_notation(&str, exponent); // handle exponent when overflow occurs
+		add_exponent_notation(&str, exponent);
 		free_bigint(integer);
 		free_bigint(decimal);
 		free_bigint(number);
