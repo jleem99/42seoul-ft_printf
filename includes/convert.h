@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 21:59:07 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 03:28:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 03:36:17 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ char		*uintmax_to_str_16(uintmax_t n, char base);
 /*
 ** Convert floating point to string
 */
+typedef struct s_bigint	t_bigint;
+
 char		*long_double_to_str_10(long double flt, int precision);
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854);
 int			ieee854_is_negative(long double flt);
 uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit);
+void		convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa);
+char		*ieee854_check_reserved_bits(t_ieee854 ieee854);
+
+int			round_number(t_bigint *number, int precision);
 
 #endif
