@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:57:57 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/27 15:49:23 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 15:08:39 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		parse_flag(t_specifier *specifier, t_printer *printer)
 	char	c;
 
 	c = printer_getc(printer);
-	while (ft_strchr("-+ #0", c))
+	while (c != '\0' && ft_strchr("-+ #0", c))
 	{
 		if (c == '-')
 			specifier->f_minus = 1;
