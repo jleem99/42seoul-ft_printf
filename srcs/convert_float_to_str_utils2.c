@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 03:20:26 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 03:20:56 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 11:51:14 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,21 @@ int			round_number(t_bigint *number, int precision)
 	else
 		bigint_resize_reverse(number, precision);
 	return (overflow);
+}
+
+void		add_decimal_point(char **pstr, size_t integer_len, int f_pound)
+{
+	char			*new_str;
+	size_t const	slen = ft_strlen(*pstr);
+	char *const		integer_str = *pstr;
+	char *const		decimal_str = integer_str + integer_len;
+
+	if (integer_len == slen && !f_pound)
+		return ;
+	new_str = malloc(ft_strlen(*pstr) + 2);
+	ft_memcpy(new_str, integer_str, integer_len);
+	new_str[integer_len] = '.';
+	ft_strcpy(new_str + integer_len + 1, decimal_str);
+	free(*pstr);
+	*pstr = new_str;
 }

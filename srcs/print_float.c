@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 04:31:16 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 11:44:46 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static void	print_f(t_printer *printer, t_specifier *specifier)
 	t_ieee854 const		ieee854 = { flt };
 	char				*str;
 
-	if (specifier->precision == -1)
-		str = long_double_to_str_10(ieee854, 6);
-	else
-		str = long_double_to_str_10(ieee854, specifier->precision);
+	str = long_double_to_str_10(ieee854, specifier);
 	apply_flag_float(&str, specifier, ieee854_is_negative(ieee854));
 	print(str, printer, specifier);
 	free(str);
@@ -39,10 +36,7 @@ static void	print_e(t_printer *printer, t_specifier *specifier)
 	t_ieee854 const		ieee854 = { flt };
 	char				*str;
 
-	if (specifier->precision == -1)
-		str = long_double_to_str_10_e(ieee854, 6, specifier->apply_pound);
-	else
-		str = long_double_to_str_10_e(ieee854, specifier->precision, specifier->apply_pound);
+	str = long_double_to_str_10_e(ieee854, specifier);
 	apply_flag_float(&str, specifier, ieee854_is_negative(ieee854));
 	print(str, printer, specifier);
 	free(str);

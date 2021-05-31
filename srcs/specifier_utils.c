@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 22:03:26 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:41:57 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 11:55:24 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	resolve_specifier(t_specifier *specifier)
 	{
 		specifier->apply_zero = specifier->f_zero &&
 			!specifier->f_minus;
-		specifier->apply_pound = specifier->f_pound &&
-			specifier->precision == 0;
 	}
 }
 
