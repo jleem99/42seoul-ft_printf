@@ -57,6 +57,7 @@ void	temp_test(void)
 	test("%0.%");
 	short int num = 65401;
 	test("%-4.hu", num);
+	test("%#");
 }
 void	bigint_divide_2_base10(t_bigint *bigint);
 
