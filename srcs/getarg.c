@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 00:24:58 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/23 00:40:59 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 14:35:59 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ intmax_t	getarg_integer(t_printer *printer, t_specifier *specifier)
 
 uintmax_t	getarg_uinteger(t_printer *printer, t_specifier *specifier)
 {
-	if (specifier->length < 3)
+	if (specifier->length == 0)
 		return (va_arg(*printer->ap, unsigned int));
+	else if (specifier->length == 1)
+		return ((unsigned char)va_arg(*printer->ap, unsigned int));
+	else if (specifier->length == 2)
+		return ((unsigned short)va_arg(*printer->ap, unsigned int));
 	else if (specifier->length == 3)
 		return (va_arg(*printer->ap, unsigned long));
 	else if (specifier->length == 4)

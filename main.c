@@ -51,6 +51,12 @@ void	temp_test(void)
 	TEST("%L"TEST_SPECIFIER, 1.L);
 	TEST("%L"TEST_SPECIFIER, 1.5L);
 	// TEST("%L"TEST_SPECIFIER, 234.3L);
+
+	test("%#3x", 0);test("this %#x number", 0);test("%#-3x", 0);test("%#5.x", 0);
+	test("%#03x", 0);test("%#08.5x", 0);
+	test("%0.%");
+	short int num = 65401;
+	test("%-4.hu", num);
 }
 void	bigint_divide_2_base10(t_bigint *bigint);
 
@@ -60,8 +66,8 @@ int		main(void)
 	for (int i = 0; i < 1000; i++)
 		run_test();
 #else
-	run_test();
-	// temp_test();
+	// run_test();
+	temp_test();
 	// test_42tester();
 
 	// t_bigint *bigint = make_bigint(7, 10);
