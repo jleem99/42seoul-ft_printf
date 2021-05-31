@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 12:16:43 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:55:38 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void	print_x(t_printer *printer, t_specifier *specifier)
 		str = uintmax_to_str_16(integer, 'a');
 	else
 		str = uintmax_to_str_16(integer, 'A');
+	if (integer == 0)
+		specifier->apply_pound = 0;
 	apply_precision_integer(&str, specifier);
 	apply_flag_integer(&str, specifier, 0);
 	print(str, printer, specifier);
