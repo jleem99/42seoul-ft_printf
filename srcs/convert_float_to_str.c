@@ -6,12 +6,13 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 05:36:56 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 09:48:37 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.h"
 #include "libft_bonus.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 
 t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854)
@@ -104,18 +105,17 @@ static int	handle_exponent(t_bigint *number, size_t integer_size)
 		exponent = integer_size - 1;
 	return (exponent);
 }
-#include <stdio.h>
+
 static void	add_exponent_notation(char **pstr, int exponent)
 {
 	char	*new_str;
 	char	exponent_notation[8];
-	
-	snprintf(exponent_notation, 8, "e%+0.2d", exponent);
+
+	ft_sprintf(exponent_notation, "e%+0.2d", exponent);
 	new_str = ft_strjoin(*pstr, exponent_notation);
 	free(*pstr);
 	*pstr = new_str;
 }
-
 
 static void	add_decimal_point_force(char **pstr, size_t integer_len)
 {
