@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 11:20:50 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 11:52:21 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:15:46 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ static void	add_exponent_notation(char **pstr, int exponent)
 	*pstr = new_str;
 }
 
-char		*long_double_to_str_10_e(t_ieee854 ieee854, t_specifier *specifier)
+char		*format_str_e(t_bigint *number, t_bigint *integer,
+							t_specifier *specifier)
 {
-	t_bigint	*integer;
-	t_bigint	*decimal;
-	t_bigint	*number;
 	char		*str;
 	int			exponent;
 	int			precision;
@@ -56,24 +54,14 @@ char		*long_double_to_str_10_e(t_ieee854 ieee854, t_specifier *specifier)
 		precision = 6;
 	else
 		precision = specifier->precision;
-	str = ieee854_check_reserved_bits(ieee854);
-	if (!str)
+	exponent = handle_exponent(number, integer->size);
+	if (round_number(number, 1 + precision))
 	{
-		integer = ieee854_get_integer_part(ieee854);
-		decimal = ieee854_get_decimal_part(ieee854);
-		number = bigint_append(integer, decimal);
-		exponent = handle_exponent(number, integer->size);
-		if (round_number(number, 1 + precision))
-		{
-			exponent++;
-			round_number(number, 1 + precision);
-		}
-		str = bigint_to_string(number);
-		add_decimal_point(&str, 1, specifier->f_pound);
-		add_exponent_notation(&str, exponent);
-		free_bigint(integer);
-		free_bigint(decimal);
-		free_bigint(number);
+		exponent++;
+		round_number(number, 1 + precision);
 	}
+	str = bigint_to_string(number);
+	add_decimal_point(&str, 1, specifier->f_pound);
+	add_exponent_notation(&str, exponent);
 	return (str);
 }

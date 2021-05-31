@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 11:54:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 12:11:59 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void		apply_precision_integer(char **pstr, t_specifier *specifier)
 	if (slen == 0 && specifier->precision == -1)
 	{
 		free(*pstr);
-		*pstr = ft_strdup("0"); // malloc check
+		*pstr = ft_strdup("0");
 	}
 	else if (specifier->precision > slen)
 	{
-		str_new = malloc(specifier->precision + 1); // malloc check ctrl f malloc
+		str_new = malloc(specifier->precision + 1);
 		ft_memset(str_new, '0', specifier->precision - slen);
 		ft_strcpy(str_new + specifier->precision - slen, *pstr);
 		free(*pstr);
@@ -50,8 +50,6 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 		else if (specifier->f_space)
 			apply_flag_space(pstr);
 	}
-	// if (is_integer_capital(specifier))
-	// 	apply_capitalization(pstr);
 }
 
 void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)

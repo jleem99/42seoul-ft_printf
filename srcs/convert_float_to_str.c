@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 11:52:46 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:16:00 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,33 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854)
 	return (decimal);
 }
 
-char		*long_double_to_str_10(t_ieee854 ieee854, t_specifier *specifier)
+char		*long_double_to_str(t_ieee854 ieee854, t_specifier *specifier)
 {
 	t_bigint	*integer;
 	t_bigint	*decimal;
 	t_bigint	*number;
+	char		*str;
+
+	str = ieee854_check_reserved_bits(ieee854);
+	if (!str)
+	{
+		integer = ieee854_get_integer_part(ieee854);
+		decimal = ieee854_get_decimal_part(ieee854);
+		number = bigint_append(integer, decimal);
+		if (ft_strchr("fF", specifier->specifier))
+			str = format_str_f(number, integer, specifier);
+		else
+			str = format_str_e(number, integer, specifier);
+		free_bigint(integer);
+		free_bigint(decimal);
+		free_bigint(number);
+	}
+	return (str);
+}
+
+char		*format_str_f(t_bigint *number, t_bigint *integer,
+							t_specifier *specifier)
+{
 	char		*str;
 	int			precision;
 
@@ -61,19 +83,9 @@ char		*long_double_to_str_10(t_ieee854 ieee854, t_specifier *specifier)
 		precision = 6;
 	else
 		precision = specifier->precision;
-	str = ieee854_check_reserved_bits(ieee854);
-	if (!str)
-	{
-		integer = ieee854_get_integer_part(ieee854);
-		decimal = ieee854_get_decimal_part(ieee854);
-		number = bigint_append(integer, decimal);
-		if (round_number(number, integer->size + precision))
-			integer->size++;
-		str = bigint_to_string(number);
-		add_decimal_point(&str, integer->size, specifier->f_pound);
-		free_bigint(integer);
-		free_bigint(decimal);
-		free_bigint(number);
-	}
+	if (round_number(number, integer->size + precision))
+		integer->size++;
+	str = bigint_to_string(number);
+	add_decimal_point(&str, integer->size, specifier->f_pound);
 	return (str);
 }

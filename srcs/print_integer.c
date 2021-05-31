@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:24:04 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 12:16:43 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	print_x(t_printer *printer, t_specifier *specifier)
 	free(str);
 }
 
-void		print_integer(t_printer *printer, t_specifier *specifier) // validate malloc
+void		print_integer(t_printer *printer, t_specifier *specifier)
 {
 	if (specifier->specifier == 'd' || specifier->specifier == 'i')
 		print_d(printer, specifier);

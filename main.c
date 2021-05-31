@@ -60,8 +60,8 @@ int		main(void)
 	for (int i = 0; i < 1000; i++)
 		run_test();
 #else
-	// run_test();
-	temp_test();
+	run_test();
+	// temp_test();
 	// test_42tester();
 
 	// t_bigint *bigint = make_bigint(7, 10);

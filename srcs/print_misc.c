@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 23:54:42 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:27:18 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 12:16:34 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_char(t_printer *printer, t_specifier *specifier)
 	}
 }
 
-void	print_str(t_printer *printer, t_specifier *specifier) // validate malloc
+void	print_str(t_printer *printer, t_specifier *specifier)
 {
 	char	*str;
 
@@ -53,7 +53,7 @@ void	print_str(t_printer *printer, t_specifier *specifier) // validate malloc
 		print(str, printer, specifier);
 }
 
-void	print_ptr(t_printer *printer, t_specifier *specifier) // validate malloc
+void	print_ptr(t_printer *printer, t_specifier *specifier)
 {
 	void *const	ptr = va_arg(*printer->ap, void *);
 	char		*str;
@@ -89,13 +89,13 @@ void	print_nchar(t_printer *printer, t_specifier *specifier)
 		*((int *)nptr) = printer->nchar;
 }
 
-void	print_percent(t_printer *printer, t_specifier *specifier) // validate malloc
+void	print_percent(t_printer *printer, t_specifier *specifier)
 {
 	char	*str;
 
 	if (!specifier->f_minus && specifier->f_zero)
 	{
-		str = malloc(specifier->width + 1); // check
+		str = malloc(specifier->width + 1);
 		ft_memset(str, '0', specifier->width - 1);
 		str[specifier->width - 1] = '%';
 		str[specifier->width] = '\0';

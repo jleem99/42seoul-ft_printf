@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 09:45:37 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 12:17:17 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static int	print_format(t_printer *printer)
 			print_nchar(printer, specifier);
 		else if (specifier->specifier == '%')
 			print_percent(printer, specifier);
-		else
-			return (0); // Todo ??
 		free(specifier);
 	}
 	return (1);
@@ -70,7 +68,6 @@ int			ft_printf(char const *format, ...)
 	{
 		if (!print_plain(&printer) || !print_format(&printer))
 		{
-			// Handle Error
 		}
 	}
 	va_end(ap);
@@ -88,7 +85,6 @@ int			ft_sprintf(char *str, char const *format, ...)
 	{
 		if (!print_plain(&printer) || !print_format(&printer))
 		{
-			// Handle Error
 		}
 	}
 	va_end(ap);

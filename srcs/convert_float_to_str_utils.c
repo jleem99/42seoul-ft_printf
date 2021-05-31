@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 04:00:51 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 03:39:15 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 12:13:14 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			ieee854_is_negative(t_ieee854 ieee854)
 /*
 ** Get mantissa bits: [start_bit, end_bit)
 */
-// Ensure very first bit of mantissa to be zero
+
 uint64_t	ieee854_get_mantissa(t_ieee854 ieee854, int start_bit, int end_bit)
 {
 	uint64_t	mantissa;
@@ -47,7 +47,7 @@ void		convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa)
 {
 	int const	base = bigint->base;
 	int			digit_idx;
-	
+
 	digit_idx = 0;
 	while (mantissa != 0)
 	{
@@ -57,7 +57,6 @@ void		convert_mantissa_to_bigint(t_bigint *bigint, uint64_t mantissa)
 	}
 }
 
-// Todo: exponent == 0 -> zero (for optimization purpose)
 char		*ieee854_check_reserved_bits(t_ieee854 ieee854)
 {
 	if (ieee854.bitfield.exponent == 32767)
