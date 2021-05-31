@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/18 18:40:46 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 09:45:37 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,25 @@ int			ft_printf(char const *format, ...)
 	t_printer	printer;
 
 	va_start(ap, format);
-	printer = init_printer(format, &ap);
+	printer = init_printer(NULL, format, &ap);
+	while (printer.fmt_idx < printer.fmt_len)
+	{
+		if (!print_plain(&printer) || !print_format(&printer))
+		{
+			// Handle Error
+		}
+	}
+	va_end(ap);
+	return (printer.nchar);
+}
+
+int			ft_sprintf(char *str, char const *format, ...)
+{
+	va_list		ap;
+	t_printer	printer;
+
+	va_start(ap, format);
+	printer = init_printer(str, format, &ap);
 	while (printer.fmt_idx < printer.fmt_len)
 	{
 		if (!print_plain(&printer) || !print_format(&printer))

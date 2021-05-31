@@ -6,17 +6,18 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/27 15:46:40 by jleem            ###   ########.fr       */
+/*   Updated: 2021/05/31 09:43:31 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printer.h"
 #include "libft.h"
 
-t_printer	init_printer(char const *format, va_list *ap)
+t_printer	init_printer(char *putstr, char const *format, va_list *ap)
 {
 	t_printer	printer;
 
+	printer.putstr = putstr;
 	printer.fmt = format;
 	printer.fmt_idx = 0;
 	printer.fmt_len = ft_strlen(printer.fmt);
@@ -41,7 +42,10 @@ char		printer_popc(t_printer *printer)
 
 void		printer_putc(t_printer *printer, char c)
 {
-	ft_putchar_fd(c, 1);
+	if (printer->putstr)
+		printer->putstr[printer->nchar] = c;
+	else
+		ft_putchar_fd(c, 1);
 	printer->nchar++;
 }
 
