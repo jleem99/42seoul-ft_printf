@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 12:17:17 by jleem            ###   ########.fr       */
+/*   Updated: 2021/06/01 22:39:22 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ int			ft_sprintf(char *str, char const *format, ...)
 		}
 	}
 	va_end(ap);
+	printer.putstr[printer.nchar] = '\0';
 	return (printer.nchar);
 }
