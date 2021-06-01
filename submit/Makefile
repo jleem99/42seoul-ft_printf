@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/05/31 14:56:32 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/02 01:33:15 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,5 +62,6 @@ fclean		: clean
 
 re			: fclean all
 
-.PHONY		: all clean fclean re
+bonus		: all
 
+.PHONY		: all clean fclean re bonus
