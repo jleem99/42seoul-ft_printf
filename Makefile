@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/06 07:25:11 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/06 07:37:22 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS		= $(patsubst %, $(SRCDIR)/%, \
 				specifier_utils.c)
 OBJS		= $(SRCS:.c=.o)
 
-LIBFT		= $(addprefix $(LIBFTDIR), libft.a)
+LIBFT		= $(addprefix $(LIBFTDIR)/, libft.a)
 LIBFTDIR	= Libft
 
 all			: $(NAME)
