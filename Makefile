@@ -6,62 +6,66 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/06 07:37:22 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/11 10:14:45 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
-AR			= ar -rcs
-WFLAGS		= -Wall -Wextra
-INC_FLAGS	= -I$(INCDIR) -I$(LIBFTDIR)
-CFLAGS		= $(WFLAGS) $(INC_FLAGS)
+CC				= gcc
+AR				= ar -rcs
+WFLAGS			= -Wall -Wextra -Werror
+INC_FLAGS		= -I$(INCDIR) -I$(LIBFTDIR)
+CFLAGS			= $(WFLAGS) $(INC_FLAGS)
 
-NAME		= libftprintf.a
-SRCDIR		= srcs
-INCDIR		= includes
+NAME			= libftprintf.a
+SRCDIR			= src
+OBJDIR			= build
+INCDIR			= includes
 
-SRCS		= $(patsubst %, $(SRCDIR)/%, \
-				apply_specifier.c \
-				apply_specifier_utils.c \
-				apply_specifier_utils2.c \
-				convert_float_to_str.c \
-				convert_float_to_str_e.c \
-				convert_float_to_str_utils.c \
-				convert_float_to_str_utils2.c \
-				convert_int_to_str.c \
-				ft_printf.c \
-				getarg.c \
-				parse_specifier.c \
-				print.c \
-				print_float.c \
-				print_integer.c \
-				print_misc.c \
-				printer.c \
-				specifier_utils.c)
-OBJS		= $(SRCS:.c=.o)
+SRCS			= $(patsubst %, $(SRCDIR)/%, \
+					apply_specifier.c \
+					apply_specifier_utils.c \
+					apply_specifier_utils2.c \
+					convert_float_to_str.c \
+					convert_float_to_str_e.c \
+					convert_float_to_str_utils.c \
+					convert_float_to_str_utils2.c \
+					convert_int_to_str.c \
+					ft_printf.c \
+					getarg.c \
+					parse_specifier.c \
+					print.c \
+					print_float.c \
+					print_integer.c \
+					print_misc.c \
+					printer.c \
+					specifier_utils.c)
+OBJS			= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-LIBFT		= $(addprefix $(LIBFTDIR)/, libft.a)
-LIBFTDIR	= Libft
+LIBFT			= $(addprefix $(LIBFTDIR)/, libft.a)
+LIBFTDIR		= Libft
 
-all			: $(NAME)
+all				: $(NAME)
 
-$(NAME)		: $(LIBFT) $(OBJS)
+$(NAME)			: $(LIBFT) $(OBJS)
 	cp $(LIBFT) $@
 	$(AR) $@ $(OBJS)
 
-$(LIBFT)	:
-	$(MAKE) -C $(LIBFTDIR)		CC='$(CC)' CFLAGS='$(CFLAGS)'	bonus
+$(OBJDIR)/%.o	: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-clean		:
+$(LIBFT)		:
+	$(MAKE) -j 8 -C $(LIBFTDIR) bonus
+
+clean			:
 	$(MAKE) -C $(LIBFTDIR) clean
-	rm -f $(OBJS)
+	$(RM) -r $(OBJDIR)/*
 
-fclean		: clean
+fclean			: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
-re			: fclean all
+re				: fclean all
 
-bonus		: all
+bonus			: all
 
-.PHONY		: all clean fclean re bonus
+.PHONY			: all clean fclean re bonus
