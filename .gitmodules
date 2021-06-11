@@ -1,15 +1,3 @@
 [submodule "Libft"]
 	path = Libft
 	url = git@github.com:kch79624/42seoul-Libft.git
-[submodule "pft"]
-	path = pft
-	url = https://github.com/gavinfielder/pft.git
-[submodule "42TESTERS-PRINTF"]
-	path = 42TESTERS-PRINTF
-	url = https://github.com/Mazoise/42TESTERS-PRINTF.git
-[submodule "PFT_2019"]
-	path = PFT_2019
-	url = https://github.com/cclaude42/PFT_2019.git
-[submodule "printf_lover_v2"]
-	path = printf_lover_v2
-	url = https://github.com/charMstr/printf_lover_v2.git
