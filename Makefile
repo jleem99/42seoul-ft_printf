@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/11 10:14:45 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/11 10:36:31 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,10 @@ $(NAME)			: $(LIBFT) $(OBJS)
 	cp $(LIBFT) $@
 	$(AR) $@ $(OBJS)
 
-$(OBJDIR)/%.o	: $(SRCDIR)/%.c
+directories		:
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o	: $(SRCDIR)/%.c directories
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT)		:
