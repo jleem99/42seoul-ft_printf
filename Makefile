@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/28 03:43:44 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/28 03:55:28 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(LIBFT)		:
 
 clean			:
 	$(MAKE) -C $(LIBFTDIR) clean
-	$(RM) -r $(OBJDIR)/*
+	$(RM) -r $(OBJDIR)
 
 fclean			: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
