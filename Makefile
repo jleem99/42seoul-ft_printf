@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/28 03:55:28 by jleem            ###   ########.fr        #
+#    Updated: 2021/06/28 16:13:33 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,15 +46,15 @@ LIBFTDIR		= Libft
 
 all				: $(NAME)
 
-$(NAME)			: $(LIBFT) $(OBJDIR) $(OBJS)
+$(NAME)			: $(LIBFT) $(OBJS)
 	cp $(LIBFT) $@
 	$(AR) $@ $(OBJS)
 
 $(OBJDIR)		:
 	mkdir -p $@
 
-$(OBJDIR)/%.o	: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR)/%.o	: $(SRCDIR)/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(LIBFT)		:
 	$(MAKE) -j 8 -C $(LIBFTDIR) bonus
