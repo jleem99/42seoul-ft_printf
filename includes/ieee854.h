@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 03:24:11 by jleem             #+#    #+#             */
-/*   Updated: 2021/07/08 18:00:04 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 18:03:25 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,6 @@
 # endif
 
 # include <stdint.h>
-
-typedef union u_ieee754_double
-{
-	double			d;
-
-	struct s_bitfield
-	{
-		uint32_t	mantissa1	: 32;
-		uint32_t	mantissa0	: 20;
-		uint32_t	exponent	: 11;
-		uint32_t	negative	: 1;
-	}				bitfield;
-	struct s_reserved
-	{
-		uint32_t	mantissa1	: 32;
-		uint32_t	mantissa0	: 19;
-		uint32_t	quiet_nan	: 1;
-		uint32_t	exponent	: 11;
-		uint32_t	negative	: 1;
-	}				reserved;
-}					t_ieee754;
-
-# define IEEE754_DOUBLE_BIAS 0x3ff
 
 typedef union u_ieee854_long_double
 {
