@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:49:43 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 13:55:38 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	print_x(t_printer *printer, t_specifier *specifier)
 	free(str);
 }
 
-void		print_integer(t_printer *printer, t_specifier *specifier)
+void	print_integer(t_printer *printer, t_specifier *specifier)
 {
 	if (specifier->specifier == 'd' || specifier->specifier == 'i')
 		print_d(printer, specifier);

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:19:35 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 09:45:11 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:55:40 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 
-typedef struct	s_printer
+typedef struct s_printer
 {
 	char const	*fmt;
 	char		*putstr;

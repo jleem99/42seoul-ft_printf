@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 03:13:28 by jleem             #+#    #+#             */
-/*   Updated: 2021/06/02 01:32:17 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	print_format(t_printer *printer)
 	return (1);
 }
 
-int			ft_printf(char const *format, ...)
+int	ft_printf(char const *format, ...)
 {
 	va_list		ap;
 	t_printer	printer;
@@ -73,7 +73,7 @@ int			ft_printf(char const *format, ...)
 	return (printer.nchar);
 }
 
-int			ft_sprintf(char *str, char const *format, ...)
+int	ft_sprintf(char *str, char const *format, ...)
 {
 	va_list		ap;
 	t_printer	printer;

@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 22:50:40 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 13:19:12 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:54:19 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static void	print_f(t_printer *printer, t_specifier *specifier)
 {
 	long double const	flt = getarg_float(printer, specifier);
-	t_ieee854 const		ieee854 = { flt };
+	t_ieee854 const		ieee854 = {flt};
 	char				*str;
 
 	str = long_double_to_str(ieee854, specifier);
@@ -33,7 +33,7 @@ static void	print_f(t_printer *printer, t_specifier *specifier)
 static void	print_e(t_printer *printer, t_specifier *specifier)
 {
 	long double const	flt = getarg_float(printer, specifier);
-	t_ieee854 const		ieee854 = { flt };
+	t_ieee854 const		ieee854 = {flt};
 	char				*str;
 
 	str = long_double_to_str(ieee854, specifier);
@@ -42,7 +42,7 @@ static void	print_e(t_printer *printer, t_specifier *specifier)
 	free(str);
 }
 
-void		print_float(t_printer *printer, t_specifier *specifier)
+void	print_float(t_printer *printer, t_specifier *specifier)
 {
 	if (specifier->specifier == 'f' || specifier->specifier == 'F')
 		print_f(printer, specifier);

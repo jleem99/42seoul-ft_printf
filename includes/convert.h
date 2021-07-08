@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 21:59:07 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 13:15:39 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:55:30 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ char		*uintmax_to_str_16(uintmax_t n, char base);
 /*
 ** Convert floating point to string
 */
-typedef struct s_bigint	t_bigint;
+typedef struct s_bigint		t_bigint;
 typedef struct s_specifier	t_specifier;
 
 t_bigint	*ieee854_get_integer_part(t_ieee854 ieee854);
 t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854);
 char		*long_double_to_str(t_ieee854 ieee854, t_specifier *specifier);
 char		*format_str_f(t_bigint *number, t_bigint *integer,
-							t_specifier *specifier);
+				t_specifier *specifier);
 char		*format_str_e(t_bigint *number, t_bigint *integer,
-							t_specifier *specifier);
+				t_specifier *specifier);
 
 int			ieee854_get_unbiased_exponent(t_ieee854 ieee854);
 int			ieee854_is_negative(t_ieee854 ieee854);

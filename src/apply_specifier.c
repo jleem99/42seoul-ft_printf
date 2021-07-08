@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 04:35:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 12:11:59 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft_bonus.h"
 #include <stdlib.h>
 
-void		apply_precision_integer(char **pstr, t_specifier *specifier)
+void	apply_precision_integer(char **pstr, t_specifier *specifier)
 {
 	char		*str_new;
 	int const	slen = ft_strlen(*pstr);
@@ -35,7 +35,7 @@ void		apply_precision_integer(char **pstr, t_specifier *specifier)
 	}
 }
 
-void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
+void	apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 {
 	if (specifier->apply_zero)
 		apply_flag_zero_integer(pstr, specifier, isneg);
@@ -52,7 +52,7 @@ void		apply_flag_integer(char **pstr, t_specifier *specifier, int isneg)
 	}
 }
 
-void		apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
+void	apply_flag_float(char **pstr, t_specifier *specifier, int isneg)
 {
 	if (ft_strcmp(*pstr, "inf") == 0 || ft_strcmp(*pstr, "nan") == 0)
 		specifier->apply_zero = 0;

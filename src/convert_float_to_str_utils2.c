@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 03:20:26 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 11:51:14 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_round_condition(t_bigint *number, int precision)
 	return (0);
 }
 
-int			round_number(t_bigint *number, int precision)
+int	round_number(t_bigint *number, int precision)
 {
 	size_t const	round_idx = number->size - (precision + 1);
 	size_t const	original_size = number->size;
@@ -59,7 +59,7 @@ int			round_number(t_bigint *number, int precision)
 	return (overflow);
 }
 
-void		add_decimal_point(char **pstr, size_t integer_len, int f_pound)
+void	add_decimal_point(char **pstr, size_t integer_len, int f_pound)
 {
 	char			*new_str;
 	size_t const	slen = ft_strlen(*pstr);

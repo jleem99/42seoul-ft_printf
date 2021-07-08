@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:31:45 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 09:43:31 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_printer	init_printer(char *putstr, char const *format, va_list *ap)
 	return (printer);
 }
 
-char		printer_getc(t_printer *printer)
+char	printer_getc(t_printer *printer)
 {
 	if (printer->fmt_idx >= printer->fmt_len)
 		return (0);
@@ -34,13 +34,13 @@ char		printer_getc(t_printer *printer)
 		return (printer->fmt[printer->fmt_idx]);
 }
 
-char		printer_popc(t_printer *printer)
+char	printer_popc(t_printer *printer)
 {
 	printer->fmt_idx++;
 	return (printer_getc(printer));
 }
 
-void		printer_putc(t_printer *printer, char c)
+void	printer_putc(t_printer *printer, char c)
 {
 	if (printer->putstr)
 		printer->putstr[printer->nchar] = c;
@@ -49,7 +49,7 @@ void		printer_putc(t_printer *printer, char c)
 	printer->nchar++;
 }
 
-int			printer_chkc(t_printer *printer, char c)
+int	printer_chkc(t_printer *printer, char c)
 {
 	if (printer_getc(printer) == c)
 	{

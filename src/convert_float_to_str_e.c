@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 11:20:50 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 13:15:46 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	add_exponent_notation(char **pstr, int exponent)
 	*pstr = new_str;
 }
 
-char		*format_str_e(t_bigint *number, t_bigint *integer,
+char	*format_str_e(t_bigint *number, t_bigint *integer,
 							t_specifier *specifier)
 {
 	char		*str;

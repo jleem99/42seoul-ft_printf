@@ -6,14 +6,14 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 07:43:49 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 23:25:24 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "convert.h"
 #include "libft.h"
 
-char		*uintmax_to_str_10(uintmax_t n)
+char	*uintmax_to_str_10(uintmax_t n)
 {
 	char		digits[40];
 	char		digits_rev[39];
@@ -33,7 +33,7 @@ char		*uintmax_to_str_10(uintmax_t n)
 	return (ft_strdup(digits));
 }
 
-char		*uintmax_to_str_8(uintmax_t n)
+char	*uintmax_to_str_8(uintmax_t n)
 {
 	char		digits[44];
 	char		digits_rev[43];
@@ -53,7 +53,7 @@ char		*uintmax_to_str_8(uintmax_t n)
 	return (ft_strdup(digits));
 }
 
-char		*uintmax_to_str_16(uintmax_t n, char base)
+char	*uintmax_to_str_16(uintmax_t n, char base)
 {
 	char		digits[33];
 	char		digits_rev[32];

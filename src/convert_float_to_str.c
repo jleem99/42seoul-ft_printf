@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 01:09:46 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/31 13:16:00 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:45 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_bigint	*ieee854_get_decimal_part(t_ieee854 ieee854)
 	return (decimal);
 }
 
-char		*long_double_to_str(t_ieee854 ieee854, t_specifier *specifier)
+char	*long_double_to_str(t_ieee854 ieee854, t_specifier *specifier)
 {
 	t_bigint	*integer;
 	t_bigint	*decimal;
@@ -73,7 +73,7 @@ char		*long_double_to_str(t_ieee854 ieee854, t_specifier *specifier)
 	return (str);
 }
 
-char		*format_str_f(t_bigint *number, t_bigint *integer,
+char	*format_str_f(t_bigint *number, t_bigint *integer,
 							t_specifier *specifier)
 {
 	char		*str;

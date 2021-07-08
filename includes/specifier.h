@@ -6,7 +6,7 @@
 /*   By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 21:15:56 by jleem             #+#    #+#             */
-/*   Updated: 2021/05/26 21:42:56 by jleem            ###   ########.fr       */
+/*   Updated: 2021/07/08 17:55:59 by jleem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_printer	t_printer;
 **			8	L
 */
 
-typedef struct	s_specifier
+typedef struct s_specifier
 {
 	char		specifier;
 	uint8_t		f_minus		: 1;
