@@ -6,15 +6,16 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/06/28 16:13:33 by jleem            ###   ########.fr        #
+#    Updated: 2021/08/06 23:40:58 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				= gcc
+CC				?= clang
 AR				= ar -rcs
+
 WFLAGS			= -Wall -Wextra -Werror
 INCFLAGS		= -I$(INCDIR) -I$(LIBFTDIR)
-CFLAGS			= $(WFLAGS) $(INCFLAGS)
+CFLAGS			:= $(WFLAGS) $(INCFLAGS) $(CFLAGS)
 
 NAME			= libftprintf.a
 SRCDIR			= src
