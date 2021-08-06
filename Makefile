@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/08/07 06:50:07 by jleem            ###   ########.fr        #
+#    Updated: 2021/08/07 06:54:12 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,9 @@ fclean			: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
 	$(RM) $(NAME)
 
-re				: fclean all
+re				:
+	$(MAKE) fclean
+	$(MAKE) all
 
 bonus			: all
 
