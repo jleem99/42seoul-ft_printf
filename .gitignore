@@ -1,6 +1,4 @@
 .vscode
-test.out
-libftprintf.a
 
 # Prerequisites
 *.d
