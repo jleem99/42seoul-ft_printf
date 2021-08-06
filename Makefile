@@ -6,7 +6,7 @@
 #    By: jleem <jleem@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 03:34:26 by jleem             #+#    #+#              #
-#    Updated: 2021/08/06 23:40:58 by jleem            ###   ########.fr        #
+#    Updated: 2021/08/07 06:50:07 by jleem            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ AR				= ar -rcs
 
 WFLAGS			= -Wall -Wextra -Werror
 INCFLAGS		= -I$(INCDIR) -I$(LIBFTDIR)
-CFLAGS			:= $(WFLAGS) $(INCFLAGS) $(CFLAGS)
+CFLAGS_			= $(WFLAGS) $(INCFLAGS) $(CFLAGS)
+unexport CFLAGS_
 
 NAME			= libftprintf.a
 SRCDIR			= src
@@ -55,10 +56,10 @@ $(OBJDIR)		:
 	mkdir -p $@
 
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS_) -c $^ -o $@
 
 $(LIBFT)		:
-	$(MAKE) -j 8 -C $(LIBFTDIR) bonus
+	$(MAKE) -C $(LIBFTDIR) bonus
 
 clean			:
 	$(MAKE) -C $(LIBFTDIR) clean
